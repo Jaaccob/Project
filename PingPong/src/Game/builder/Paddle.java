@@ -101,7 +101,23 @@ public class Paddle extends Rectangle implements KeyListener {
      */
     @Override
     public void keyReleased(KeyEvent e) {
-
+        if (id == 1) {
+            if (e.getKeyCode() == KeyEvent.VK_W) {
+                setySpeed(0);
+                move();
+            } else if (e.getKeyCode() == KeyEvent.VK_S) {
+                setySpeed(0);
+                move();
+            }
+        } else {
+            if (e.getKeyCode() == KeyEvent.VK_UP) {
+                setySpeed(0);
+                move();
+            } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                setySpeed(0);
+                move();
+            }
+        }
     }
 
     /**

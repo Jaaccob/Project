@@ -1,6 +1,7 @@
 package Game;
 
 import Game.builder.Ball;
+import Game.builder.Obstacle;
 import Game.builder.Paddle;
 import Game.builder.Score;
 
@@ -11,6 +12,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.*;
+import java.util.Random;
 
 /**
  * Klasa <code>GamePanel</code> odpowiedzialna jest za logiczną część gry oraz za utworzenie poszczególnych elementów
@@ -46,6 +48,14 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
      */
     private int ballHeight = 25;
     /**
+     * Zmienna odpowiedzialna za szerokość przeszkody
+     */
+    private int obstacleWidth = 10;
+    /**
+     * Zmienna odpowiedzialna za wysokość przeszkody
+     */
+    private int obstacleHeight = 200;
+    /**
      * Zmienna lokalna odpowiedzialna za
      */
     private Image image;
@@ -66,6 +76,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
      */
     private Ball ball;
     /**
+     * Zmienna lokalna odpowiedzialbna za przeszkodę dla piłeczki
+     */
+    private Obstacle obstacle;
+    /**
      * Zmienna lokalna odpowiedzialna za punkty dla graczy
      */
     private Score score;
@@ -85,6 +99,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
         newBall();
         newPaddles();
+        newObstacle();
         playMusic("/home/jacob/Programer/Project/PingPong/src/Music/Music.wav", true);
 
         this.setFocusable(true);
@@ -98,7 +113,13 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
      * Metoda <code>newBall</code> odpowiedzialna jest za utworzenie piłeczki pingpongowej według podanego wzorca
      */
     public void newBall() {
-        ball = new Ball((WIDTH / 2) - (ballWidth / 2), (HEIGHT / 2) - (ballHeight / 2), 25, 25);
+        Random random = new Random();
+        int site = random.nextInt(2);
+        if (site == 1)
+            site = 30;
+        else
+            site = -30;
+        ball = new Ball((WIDTH / 2) - (ballWidth / 2) - site, (HEIGHT / 2) - (ballHeight / 2), 25, 25);
     }
 
     /**
@@ -107,6 +128,13 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     public void newPaddles() {
         paddleOne = new Paddle(0, (HEIGHT / 2) - (paddleHeight / 2), paddleWidth, paddleHeight, 1);
         paddleTwo = new Paddle(WIDTH - paddleWidth, (HEIGHT / 2) - (paddleHeight / 2), paddleWidth, paddleHeight, 2);
+    }
+
+    /**
+     * Metoda <code>newObstacle</code> odpowiedzialna jest za utworzenie przeszkody dla piłeczki pingpongowej
+     */
+    public void newObstacle() {
+        obstacle = new Obstacle((WIDTH / 2) - (obstacleWidth / 2), (HEIGHT / 2) - (obstacleHeight / 2), obstacleWidth, obstacleHeight);
     }
 
     /**
@@ -164,6 +192,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         paddleOne.draw(g);
         paddleTwo.draw(g);
         ball.draw(g);
+        obstacle.draw(g);
         score.draw(g);
         Toolkit.getDefaultToolkit().sync();
     }
@@ -186,13 +215,18 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         }
         if (ball.intersects(paddleTwo)) {
             ball.setxVelocity(Math.abs(ball.getxVelocity()));
-            ball.setxVelocity(ball.getxVelocity() - 1);
+            ball.setxVelocity(-ball.getxVelocity());
             if (ball.getyVelocity() > 0)
-                ball.setyVelocity(ball.getyVelocity() - 1);
+                ball.setyVelocity(ball.getyVelocity() + 1);
             else
                 ball.setyVelocity(ball.getyVelocity() - 1);
             ball.setxVelocity(ball.getxVelocity());
             ball.setyVelocity(ball.getyVelocity());
+            playMusic("/home/jacob/Programer/Project/PingPong/src/Music/Odbij.wav", false);
+        }
+
+        if (ball.intersects(obstacle)) {
+            ball.setxVelocity(-ball.getxVelocity());
             playMusic("/home/jacob/Programer/Project/PingPong/src/Music/Odbij.wav", false);
         }
 
@@ -277,7 +311,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
      */
     @Override
     public void keyReleased(KeyEvent e) {
-        //KeyReleased not used
+        paddleOne.keyReleased(e);
+        paddleTwo.keyReleased(e);
     }
 
     /**
