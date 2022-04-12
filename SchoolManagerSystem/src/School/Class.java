@@ -34,7 +34,7 @@ public class Class {
             if (this.students.contains(newStudent)) {
                 throw new RepeatingExcepted();
             }
-            this.students.add(newStudent);
+            students.add(newStudent);
         } catch (RepeatingExcepted e) {
             System.out.println("Uczeń znajduje się już w tej klasie");
             return false;

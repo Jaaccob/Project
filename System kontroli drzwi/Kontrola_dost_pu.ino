@@ -80,9 +80,8 @@ void loop()
 
 bool compare_ID(String uid1){
     /*
-   * Funkcja compareUids posiada 2 wskaŸniki jako argumenty
+   * Funkcja compareUids posiada wskaŸnik jako argumenty
    * -uid1: pierwsza iloœæ bytów pierwszej karty
-   * -uid2: druga iloœæ bytów drugiej karty\
    * Funkcja porównuje bajty w kartach. Jeœli, któryœ z bajtów siê nie zgadza funkcja zwraca FA£SZ.
    */
    Udp.beginPacket(Udp.remoteIP(), Udp.remotePort());       //Inicjalizacja pakietu do wysyłania
