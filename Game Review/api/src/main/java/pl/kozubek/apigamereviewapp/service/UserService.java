@@ -22,4 +22,8 @@ public class UserService {
         userRepository.findAll().forEach(users::add);
         return users;
     }
+
+    public User getUser(int id) {
+        return userRepository.findById((long) id).orElseThrow();
+    }
 }

@@ -56,7 +56,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
         viewHolder.itemView.setOnClickListener(view -> {
             Log.d(TAG,"onBindViewHolder: click on" +games.get(i));
-            Toast.makeText(context, "You clicked " + games.get(i).getId(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(context, "You clicked " + games.get(i).getId(), Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(context, DisplayReviewActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra("id", games.get(i).getId());

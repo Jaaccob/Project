@@ -45,6 +45,28 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".functionHelper.SearchGame"
+            android:exported="true"
+            android:label="Activity Title"
+            android:theme="@style/AppTheme.NoActionBar"
+            tools:ignore="DuplicateActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".display.DisplayProfile"
+            android:exported="true"
+            android:label="Activity Title"
+            android:theme="@style/AppTheme.NoActionBar"
+            tools:ignore="DuplicateActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
     </application>
 

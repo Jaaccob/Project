@@ -13,3 +13,11 @@
 .externalNativeBuild
 .cxx
 local.properties
+/app/src/main/res/drawable/Profile.svg
+/app/src/main/res/drawable/TOP4.svg
+/app/src/main/res/drawable/follow game.svg
+/app/src/main/res/drawable/followusers.svg
+/app/src/main/res/drawable/login.svg
+/app/src/main/res/drawable/logout.svg
+/app/src/main/res/drawable/settings.svg
+/app/src/main/res/drawable/statistics.svg

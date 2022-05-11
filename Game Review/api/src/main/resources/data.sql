@@ -102,7 +102,48 @@ VALUES (9,
         'Osadzona w realiach science fiction, dwuwymiarowa gra symulacyjna kanadyjskiego studia Klei Entertainment, ' ||
         'w której zajmujemy się rozwijaniem kosmicznej kolonii na bliżej nieokreślonej planecie. ',
         'Klei Entertainment');
-
+INSERT INTO GAME(id, title, imageURL, description, author)
+VALUES (10,
+        'Dyson Sphere Program',
+        'https://cdn.gracza.pl/galeria/gry13/534518515.jpg',
+        'Dyson Sphere Program to kosmiczna strategia ekonomiczna, w której zarządzamy i rozbudowujemy bazę,'||
+        ' dbamy o ekonomię, inne zasoby i automatyzację procesów oraz eksplorujemy wszechświat w celu stworzenia prężnie działającego imperium.',
+        ' Youthcat Studio');
+INSERT INTO GAME(id, title, imageURL, description, author)
+VALUES (11,
+        'Galactic Civilizations IV',
+        'https://cdn.gracza.pl/galeria/gry13/629203015.jpg',
+        'Czwarta odsłona popularnych gier strategicznych, opracowana przez studio Stardock.' ||
+        'Wciel się w przywódcę kosmicznej cywilizacji i odkryj na nowo rozbudowany i udoskonalony świat Galactic Civilizations IV.',
+        ' Stardock Corporation');
+INSERT INTO GAME(id, title, imageURL, description, author)
+VALUES (12,
+        'Romans: Age of Caesar',
+        'https://cdn.gracza.pl/galeria/gry13/199460250.jpg',
+        'Duchowy spadkobierca gry Stronghold Kingdoms - strategia MMO od studia FireFly (ojców cyklu Twierdza),' ||
+        'w której gracze wcielają się w zarządców antycznych rzymskich miast. ',
+        'Firefly Studios');
+INSERT INTO GAME(id, title, imageURL, description, author)
+VALUES (13,
+        'Distant Worlds 2',
+        'https://cdn.gracza.pl/galeria/gry13/grupy/1211795281.jpg',
+        'Distant Worlds 2 jest kontynuacją ciepło przyjętej przez graczy produkcji RTS z podgatunku 4X. '||
+        'Gra została stworzona przez studio Code Force, czyli twórców pierwszej części. Tytuł odznacza się dużą skalą świata oraz możliwością dopasowania rozgrywki do własnych preferencji.',
+        'Code Force Limited');
+INSERT INTO GAME(id, title, imageURL, description, author)
+VALUES (14,
+        'Songs of Conquest',
+        'https://cdn.gracza.pl/galeria/gry13/grupy/14253921.jpg',
+        'Turowa strategia fantasy wzbogacona elementami RPG, nawiązująca do pierwszych odsłon serii Heroes of Might & Magic. Gracz musi zarówno zarządzać królestwem,'||
+        'jak i dowodzić drużyną podczas eksplorowania królestwa i wypełniania zadań. Do tego dochodzą taktyczne potyczki.',
+        'Lavapotion');
+INSERT INTO GAME(id, title, imageURL, description, author)
+VALUES (15,
+        'Hearthstone',
+        'https://cdn.gracza.pl/galeria/gry13/grupy/13826.jpg',
+        'Karciana gra logiczna osadzona w fantastycznym świecie Azeroth, znanym z cyklu Warcraft. Tytuł wyprodukowany został przez firmę Blizzard Entertainment, '||
+        'a źródłem inspiracji dla deweloperów stała się m.in. kultowa, kolekcjonerska gra karciana Magic: The Gathering.',
+        'Blizzard Entertainment');
 
 INSERT INTO CONNECT_GAME_TYPE(ID_GAME, ID_TYPE)
 VALUES (1, 1);
@@ -173,7 +214,32 @@ VALUES (9, 4);
 INSERT INTO CONNECT_GAME_TYPE(ID_GAME, ID_TYPE)
 VALUES (9, 7);
 
-
+INSERT INTO CONNECT_GAME_TYPE(ID_GAME, ID_TYPE)
+VALUES (10, 1);
+INSERT INTO CONNECT_GAME_TYPE(ID_GAME, ID_TYPE)
+VALUES (10, 5);
+INSERT INTO CONNECT_GAME_TYPE(ID_GAME, ID_TYPE)
+VALUES (11, 8);
+INSERT INTO CONNECT_GAME_TYPE(ID_GAME, ID_TYPE)
+VALUES (11, 10);
+INSERT INTO CONNECT_GAME_TYPE(ID_GAME, ID_TYPE)
+VALUES (12, 2);
+INSERT INTO CONNECT_GAME_TYPE(ID_GAME, ID_TYPE)
+VALUES (12, 5);
+INSERT INTO CONNECT_GAME_TYPE(ID_GAME, ID_TYPE)
+VALUES (12, 3);
+INSERT INTO CONNECT_GAME_TYPE(ID_GAME, ID_TYPE)
+VALUES (13, 9);
+INSERT INTO CONNECT_GAME_TYPE(ID_GAME, ID_TYPE)
+VALUES (13, 2);
+INSERT INTO CONNECT_GAME_TYPE(ID_GAME, ID_TYPE)
+VALUES (14, 1);
+INSERT INTO CONNECT_GAME_TYPE(ID_GAME, ID_TYPE)
+VALUES (14, 8);
+INSERT INTO CONNECT_GAME_TYPE(ID_GAME, ID_TYPE)
+VALUES (15, 9);
+INSERT INTO CONNECT_GAME_TYPE(ID_GAME, ID_TYPE)
+VALUES (15, 4);
 
 INSERT INTO USERS(id, first_Name, last_Name, password, nick, email)
 VALUES (1, 'Jakub', 'Kozubek', 'Jaaccob', 'jakoz',
@@ -202,7 +268,15 @@ VALUES (8, 'Dominik', 'Bzik', '4everB', 'dombz',
 INSERT INTO USERS(id, first_Name, last_Name, password, nick, email)
 VALUES (9, 'Kamari', 'Due', 'Murderer', 'kamdu',
         'Due_To_Murder@gmail.com');
-
+INSERT INTO USERS(id, first_Name, last_Name, password, nick, email)
+VALUES (10, 'Conqueror', 'WR', 'qwdas3qw', 'xasw',
+        'Walix15@gmail.com');
+INSERT INTO USERS(id, first_Name, last_Name, password, nick, email)
+VALUES (11, 'Samari', 'Amalejkum', 'qwdasz', 'WOrldDestroyer',
+        'Krawczykonus@gmail.com');
+INSERT INTO USERS(id, first_Name, last_Name, password, nick, email)
+VALUES (12, 'Paweł', 'Bisok', 'asdawdas', 'Woxis',
+        'PabloEnrico@gmail.com');
 
 INSERT INTO FOLLOWED_GAMES(id_User, followed_Id_Game)
 VALUES (1, 1);
@@ -250,6 +324,22 @@ INSERT INTO FOLLOWED_GAMES(id_User, followed_Id_Game)
 VALUES (9, 1);
 INSERT INTO FOLLOWED_USERS(id_User, id_Followed_User)
 VALUES (9, 7);
+
+INSERT INTO FOLLOWED_GAMES(id_User, followed_Id_Game)
+VALUES (10, 1);
+INSERT INTO FOLLOWED_USERS(id_User, id_Followed_User)
+VALUES (10, 4);
+INSERT INTO FOLLOWED_USERS(id_User, id_Followed_User)
+VALUES (11, 12);
+INSERT INTO FOLLOWED_USERS(id_User, id_Followed_User)
+VALUES (11, 12);
+-- INSERT INTO FOLLOWED_USERS(id_User, id_Followed_User)
+-- VALUES (12, 13);
+-- INSERT INTO FOLLOWED_USERS(id_User, id_Followed_User)
+-- VALUES (12, 14);
+-- INSERT INTO FOLLOWED_USERS(id_User, id_Followed_User)
+-- VALUES (12, 15);
+
 
 INSERT INTO REVIEW(id_Review, id_User, id_Game, mark, date, description)
 VALUES (1, 1, 1, 5,
@@ -311,3 +401,48 @@ VALUES (19, 1, 2, 1,
 INSERT INTO REVIEW(id_Review, id_User, id_Game, mark, date, description)
 VALUES (20, 8, 3, 4,
         '2020-01-23T13:45:23.236956900', 'Gdyby tylko fabuła była trochę ciekawsza dałbym 5');
+INSERT INTO REVIEW(id_Review, id_User, id_Game, mark, date, description)
+VALUES (21, 12, 11, 5,
+        '2021-03-23T13:45:23.236956900', 'Całkiem koks gierka.');
+INSERT INTO REVIEW(id_Review, id_User, id_Game, mark, date, description)
+VALUES (22, 10, 12, 5,
+        '2022-04-23T13:45:23.236956900', 'Wziuuum, 3ci dzień bez snu, gramy dalej.');
+INSERT INTO REVIEW(id_Review, id_User, id_Game, mark, date, description)
+VALUES (23, 11, 15, 3,
+        '2021-03-23T13:45:23.236956900', 'Taka mehhhhh');
+INSERT INTO REVIEW(id_Review, id_User, id_Game, mark, date, description)
+VALUES (24, 4, 14, 2,
+        '2021-02-23T13:45:23.236956900', 'Nie przepadam, bardzo średnia :/');
+INSERT INTO REVIEW(id_Review, id_User, id_Game, mark, date, description)
+VALUES (25, 12, 13, 2,
+        '2022-04-23T13:45:23.236956900', 'Dobrze, że chociaż pieniądze zwrócili.');
+INSERT INTO REVIEW(id_Review, id_User, id_Game, mark, date, description)
+VALUES (26, 5, 10, 4,
+        '2021-11-23T13:45:23.236956900', 'Zależy od dnia i humoru, dzisiaj jest 4');
+INSERT INTO REVIEW(id_Review, id_User, id_Game, mark, date, description)
+VALUES (27, 3, 13, 1,
+        '2022-03-23T13:45:23.236956900', 'Dno i wodorosty.');
+INSERT INTO REVIEW(id_Review, id_User, id_Game, mark, date, description)
+VALUES (28, 11, 7, 5,
+        '2021-12-23T13:12:58.236956900', 'Polecam.');
+INSERT INTO REVIEW(id_Review, id_User, id_Game, mark, date, description)
+VALUES (29, 10, 9, 5,
+        '2022-01-30T19:14:22.236956900', 'Pograne.');
+INSERT INTO REVIEW(id_Review, id_User, id_Game, mark, date, description)
+VALUES (30, 5, 10, 4,
+        '2021-11-23T13:45:23.236956900', 'Całkiem koks. ');
+INSERT INTO REVIEW(id_Review, id_User, id_Game, mark, date, description)
+VALUES (31, 10, 11, 3,
+        '2021-03-23T13:45:23.236956900', 'Średniawa');
+INSERT INTO REVIEW(id_Review, id_User, id_Game, mark, date, description)
+VALUES (32, 3, 12, 1,
+        '2021-12-23T13:45:23.236956900', 'Nie polecam');
+INSERT INTO REVIEW(id_Review, id_User, id_Game, mark, date, description)
+VALUES (33, 9, 14, 2,
+        '2022-03-23T13:45:23.236956900', 'Bardzo słabo jak na taki budżet...');
+INSERT INTO REVIEW(id_Review, id_User, id_Game, mark, date, description)
+VALUES (34, 1, 14, 3,
+        '2021-12-23T13:45:23.236956900', 'Nie wiem co powiedzieć, nie porwało...');
+INSERT INTO REVIEW(id_Review, id_User, id_Game, mark, date, description)
+VALUES (35, 11, 15, 5,
+        '2021-03-23T13:45:23.236956900', 'Polecanko');

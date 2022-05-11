@@ -3,7 +3,6 @@ package pl.kozubek.apigamereviewapp.service;
 import org.springframework.stereotype.Service;
 import pl.kozubek.apigamereviewapp.entity.ConnectGameType;
 import pl.kozubek.apigamereviewapp.entity.Game;
-import pl.kozubek.apigamereviewapp.entity.Review;
 import pl.kozubek.apigamereviewapp.entity.Type;
 import pl.kozubek.apigamereviewapp.repository.ConGameTypeRepository;
 import pl.kozubek.apigamereviewapp.repository.GameRepository;
@@ -11,12 +10,11 @@ import pl.kozubek.apigamereviewapp.repository.ReviewRepository;
 import pl.kozubek.apigamereviewapp.repository.TypeRepository;
 import pl.kozubek.apigamereviewapp.service.dto.GameWithTypeDTO;
 import pl.kozubek.apigamereviewapp.service.dto.GameWithoutTypeDTO;
-import pl.kozubek.apigamereviewapp.service.dto.ReviewMarkDto;
 import pl.kozubek.apigamereviewapp.service.mapper.GameWithTypeDTOMapper;
 import pl.kozubek.apigamereviewapp.service.mapper.GameWithoutTypMapper;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -73,4 +71,16 @@ public class GameService {
         return GameWithoutTypMapper.mapToGameDtos(gameRepository.findAllGames(), reviewRepository.findAllMark());
     }
 
+    public List<GameWithoutTypeDTO> getFourBestGames() {
+
+        List<GameWithoutTypeDTO> gameWithoutTypeDTOS = GameWithoutTypMapper.mapToGameDtos(gameRepository.findAllGames(), reviewRepository.findAllMark());
+        return gameWithoutTypeDTOS.stream()
+                .sorted(Comparator.comparing(GameWithoutTypeDTO::getMark).reversed())
+                .limit(4)
+                .toList();
+    }
+
+    public GameWithoutTypeDTO getSingleGame(String title) {
+        return GameWithoutTypMapper.mapToSingleGameDto(gameRepository.findByTitle(title),reviewRepository.findAllMark());
+    }
 }

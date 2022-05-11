@@ -19,7 +19,6 @@ public class ReviewDtoMapper {
 
     }
 
-
     private static ReviewDto mapReviewToDto(Game game, User user, Review review) {
         return ReviewDto.builder()
                 .title(game.getTitle())

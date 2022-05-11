@@ -20,6 +20,15 @@ public class GameWithoutTypMapper {
 
     }
 
+    public static GameWithoutTypeDTO mapToSingleGameDto(Game game, List<ReviewMarkDto> marks) {
+        double mark = marks.stream()
+                .filter(m -> m.getIdGame().equals(game.getId()))
+                .mapToDouble(ReviewMarkDto::getMark)
+                .average()
+                .orElse(Double.MIN_VALUE);
+        return mapToSingleGameDto(game,mark);
+    }
+
     private static GameWithoutTypeDTO mapToGameDto(Game game, ReviewMarkDto mark) {
         return GameWithoutTypeDTO.builder()
                 .id(game.getId())
@@ -28,6 +37,17 @@ public class GameWithoutTypMapper {
                 .description(game.getDescription())
                 .author(game.getAuthor())
                 .mark(mark.getMark())
+                .build();
+    }
+
+    private static GameWithoutTypeDTO mapToSingleGameDto(Game game, double mark) {
+        return GameWithoutTypeDTO.builder()
+                .id(game.getId())
+                .imageURL(game.getImageURL())
+                .title(game.getTitle())
+                .description(game.getDescription())
+                .author(game.getAuthor())
+                .mark(mark)
                 .build();
     }
 }

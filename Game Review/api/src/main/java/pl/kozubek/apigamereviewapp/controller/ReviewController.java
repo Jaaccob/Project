@@ -33,8 +33,13 @@ public class ReviewController {
         return reviewService.getReviews(mapToGame(game));
     }
 
-    @GetMapping("reviews/{id}")
+    @GetMapping("/reviews/{id}")
     public List<ReviewDto> getAllReviewsById(@PathVariable int id){
         return reviewService.getAllReviewsById(id);
+    }
+
+    @GetMapping("/singleReview/{title}")
+    public List<ReviewDto> getSingleGame(@PathVariable String title){
+        return reviewService.getSingleGame(title);
     }
 }

@@ -7,6 +7,8 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -132,14 +134,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
+            case R.id.all_games:
+                Intent all_games = new Intent(this, MainActivity.class);
+                all_games.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(all_games);
+                break;
             case R.id.four_best_games:
-                Intent intent = new Intent(this,DisplayFourBestGames.class);
+                Intent intent = new Intent(this, DisplayFourBestGames.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+                break;
+            case R.id.profile:
+                Intent profile = new Intent(this, DisplayProfile.class);
+                profile.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(profile);
                 break;
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }

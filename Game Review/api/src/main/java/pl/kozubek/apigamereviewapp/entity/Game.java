@@ -33,4 +33,13 @@ public class Game {
     @JoinColumn(name = "id_Game", updatable = false, insertable = false)
     private List<Review> reviews;
 
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "(" +
+                "id = " + id + ", " +
+                "title = " + title + ", " +
+                "imageURL = " + imageURL + ", " +
+                "description = " + description + ", " +
+                "author = " + author + ")";
+    }
 }

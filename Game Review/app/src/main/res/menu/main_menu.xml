@@ -4,19 +4,29 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/four_best_games"
+            android:icon="@drawable/top4"
             android:title="Four best game" />
         <item
+            android:id="@+id/all_games"
+            android:icon="@drawable/allgame"
+            android:title="All games" />
+        <item
             android:id="@+id/statystic"
+            android:icon="@drawable/statistics"
             android:title="Statystic" />
         <item
             android:id="@+id/followed_user"
-            android:title="Follow user" />
+            android:icon="@drawable/followuser"
+            android:title="Follow users" />
         <item
             android:id="@+id/follow_game"
-            android:title="Follow Game" />
+            android:icon="@drawable/followgame"
+            android:title="Follow Games" />
         <item
             android:id="@+id/option"
-            android:title="Option" />
+            android:icon="@drawable/settings"
+            android:title="Options" />
+
     </group>
 
     <group android:checkableBehavior="single">
@@ -25,14 +35,17 @@
             <menu>
                 <item
                     android:id="@+id/login"
+                    android:icon="@drawable/login"
                     android:title="Login" />
 
                 <item
                     android:id="@+id/profile"
+                    android:icon="@drawable/profile"
                     android:title="Profile" />
 
                 <item
                     android:id="@+id/logout"
+                    android:icon="@drawable/logout"
                     android:title="Logout" />
             </menu>
 
