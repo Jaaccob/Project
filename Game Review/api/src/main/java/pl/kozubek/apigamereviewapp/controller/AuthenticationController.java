@@ -1,6 +1,5 @@
 package pl.kozubek.apigamereviewapp.controller;
 
-import lombok.Data;
 import org.springframework.web.bind.annotation.*;
 import pl.kozubek.apigamereviewapp.service.AuthenticationService;
 import pl.kozubek.apigamereviewapp.service.dto.AuthenticationJwtToken;
@@ -19,7 +18,7 @@ public class AuthenticationController {
         this.userDetailsService = userDetailsService;
     }
 
-    @GetMapping("/token")
+    @PostMapping("/token")
     public AuthenticationJwtToken getAuthenticationToken(@RequestBody UserDetailsDto userDetailsDto) {
         return authenticationService.createAuthenticationToken(userDetailsDto);
     }
@@ -29,10 +28,4 @@ public class AuthenticationController {
         return userDetailsService.saveUser(userDetailsDto);
     }
 
-    @PostMapping("/login")
-    public AuthenticationJwtToken loginUser(@RequestBody UserDetailsDto userDetailsDto) {
-        if (userDetailsService.loginUser(userDetailsDto))
-            return authenticationService.createAuthenticationToken(userDetailsDto);
-        return null;
-    }
 }

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <RelativeLayout
+            android:id="@+id/android_large_1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp">
+
+            <TextView
+                android:id="@+id/welcome"
+                android:layout_width="match_parent"
+                android:layout_height="151dp"
+                android:layout_gravity="center_horizontal|center"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:gravity="center"
+                android:text="Sign up"
+                android:textColor="@color/colorPrimaryM"
+                android:textSize="64sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/nickTextRegister"
+                android:layout_width="320dp"
+                android:layout_height="54dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="160dp"
+                android:backgroundTint="@color/colorAccentM"
+                android:hint="Nick" />
+
+            <EditText
+                android:id="@+id/passwordTextRegister"
+                android:layout_width="320dp"
+                android:layout_height="54dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="240dp"
+                android:backgroundTint="@color/colorAccentM"
+                android:hint="Password"
+                android:importantForAutofill="no"
+                android:inputType="textPassword" />
+
+            <EditText
+                android:id="@+id/passwordConfirmTextRegister"
+                android:layout_width="320dp"
+                android:layout_height="54dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="320dp"
+                android:autofillHints=""
+                android:backgroundTint="@color/colorAccentM"
+                android:hint="Confirm Password"
+                android:inputType="textPassword" />
+
+            <TextView
+                android:id="@+id/errorRegister"
+                android:layout_width="320dp"
+                android:layout_height="54dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="370dp" />
+
+            <Button
+                android:id="@+id/rectangle_1"
+                android:layout_width="320dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="440dp"
+                android:backgroundTint="@color/colorPrimaryM"
+                android:onClick="checkCorrectPassword"
+                android:text="Sign up"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

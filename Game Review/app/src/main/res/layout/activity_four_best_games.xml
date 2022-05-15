@@ -9,7 +9,6 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
-
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
@@ -19,66 +18,61 @@
         app:menu="@menu/main_menu"
         tools:ignore="MissingConstraints" />
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/secondaryColor">
+        android:background="@color/white">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-
-            android:id="@+id/constraint"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
-            tools:context="pl.kozubek.reviewgame.display.DisplayFourBestGames">
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:padding="10dp">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/gameList"
+            <RelativeLayout    xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="60dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/searchTextId"
-                app:layout_constraintVertical_bias="0.877" />
+                android:layout_height="match_parent">
 
-            <EditText
-                android:id="@+id/searchTextId"
-                android:layout_width="300dp"
-                android:layout_height="48dp"
-                android:background="@color/primaryDarkColor"
-                android:ems="10"
-                android:hint="@string/search"
-                android:inputType="textPersonName"
-                android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.01" />
+                <EditText
+                    android:id="@+id/searchTextId"
+                    android:layout_width="250dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:autofillHints=""
+                    android:backgroundTint="@color/colorAccentM"
+                    android:hint="Confirm Password"
+                    android:inputType="textPassword" />
 
-            <Button
-                android:layout_width="70dp"
-                android:layout_height="48dp"
-                android:layout_marginStart="10dp"
-                android:background="@color/primaryDarkColor"
-                android:onClick="findGame"
-                android:text="Wyszukaj"
-                android:textColor="@color/white"
-                android:textSize="10sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/searchTextId"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.01" />
+                <Button
+                    android:id="@+id/rectangle_1"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="285dp"
+                    android:layout_marginTop="10dp"
+                    android:backgroundTint="@color/colorPrimaryM"
+                    android:onClick="checkCorrectPassword"
+                    android:text="Search"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/gameList"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="60dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/searchTextId"
+                    app:layout_constraintVertical_bias="0.877" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            </RelativeLayout>
 
-
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.drawerlayout.widget.DrawerLayout>

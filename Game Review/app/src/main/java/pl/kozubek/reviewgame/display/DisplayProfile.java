@@ -5,10 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -16,25 +14,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.navigation.NavigationView;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import pl.kozubek.reviewgame.R;
-import pl.kozubek.reviewgame.adapter.Adapter;
-import pl.kozubek.reviewgame.entity.Game;
-import pl.kozubek.reviewgame.functionHelper.SearchGame;
 
 public class DisplayProfile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -87,6 +77,11 @@ public class DisplayProfile extends AppCompatActivity implements NavigationView.
                 Intent profile = new Intent(this, DisplayProfile.class);
                 profile.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(profile);
+                break;
+            case R.id.logout:
+                Intent login = new Intent(this, DisplayLogin.class);
+                login.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(login);
                 break;
         }
 

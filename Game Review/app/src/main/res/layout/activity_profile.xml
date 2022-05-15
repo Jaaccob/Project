@@ -20,13 +20,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/secondaryColor">
+        android:background="@color/white">
 
         <LinearLayout
             android:id="@+id/line1"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:background="@color/primaryDarkColor"
+            android:background="@color/colorPrimaryDark"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -61,7 +61,7 @@
             <TextView
                 android:layout_width="70dp"
                 android:layout_height="20dp"
-                android:background="@color/primaryDarkColor"
+                android:background="@color/colorAccent"
                 android:text="Nick"
                 android:textSize="15dp"
                 app:layout_constraintBottom_toTopOf="@+id/nickProfile"
@@ -120,7 +120,7 @@
             <TextView
                 android:layout_width="70dp"
                 android:layout_height="20dp"
-                android:background="@color/primaryDarkColor"
+                android:background="@color/colorAccent"
                 android:text="Password"
                 android:textSize="15dp"
                 app:layout_constraintBottom_toTopOf="@+id/passwordProfile"
@@ -177,7 +177,7 @@
             <TextView
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
-                android:background="@color/primaryDarkColor"
+                android:background="@color/colorAccent"
                 android:text="First Name"
                 android:textSize="15dp"
                 app:layout_constraintBottom_toTopOf="@+id/firstNameProfile"
@@ -238,7 +238,7 @@
             <TextView
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
-                android:background="@color/primaryDarkColor"
+                android:background="@color/colorAccent"
                 android:text="Last Name"
                 android:textSize="15dp"
                 app:layout_constraintBottom_toTopOf="@+id/lastNameProfile"

@@ -14,9 +14,13 @@
         <entry key="app/src/main/res/layout/all_game.xml" value="0.2671875" />
         <entry key="app/src/main/res/layout/custome_list_layout.xml" value="0.25" />
         <entry key="app/src/main/res/layout/custome_list_review_layout.xml" value="0.2671875" />
+        <entry key="app/src/main/res/layout/frame_1.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/login.xml" value="0.2" />
         <entry key="app/src/main/res/layout/navigation_drawer_header.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/register.xml" value="0.25" />
         <entry key="app/src/main/res/layout/review_game.xml" value="0.2671875" />
-        <entry key="app/src/main/res/layout/test.xml" value="0.2671875" />
+        <entry key="app/src/main/res/layout/test.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/test_four_best_games.xml" value="0.2671875" />
         <entry key="app/src/main/res/menu/main_menu.xml" value="0.33" />
       </map>
     </option>

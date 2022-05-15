@@ -1,7 +1,6 @@
 package pl.kozubek.reviewgame.display;
 
 import android.annotation.SuppressLint;
-import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
@@ -11,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
@@ -20,24 +20,19 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.DateFormat;
 import java.text.DecimalFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 import pl.kozubek.reviewgame.R;
-import pl.kozubek.reviewgame.adapter.Adapter;
 import pl.kozubek.reviewgame.adapter.AdapterDisplayReview;
-import pl.kozubek.reviewgame.entity.Game;
 import pl.kozubek.reviewgame.entity.Review;
 
 public class DisplayReviewActivity extends AppCompatActivity {
     private static final String TAG = "DisplayReviewActivity";
+    private String jsonToken;
     RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -75,6 +70,7 @@ public class DisplayReviewActivity extends AppCompatActivity {
             String author = getIntent().getStringExtra("author");
             String description = getIntent().getStringExtra("description");
             Double mark = getIntent().getDoubleExtra("mark", 0);
+            jsonToken = getIntent().getStringExtra("jwtToken");
 
 
             setTextView(id, title, imageURL, author, mark, description);
@@ -100,7 +96,7 @@ public class DisplayReviewActivity extends AppCompatActivity {
     private void extractGame(Long id) {
         Log.d(TAG, "extract: connect with api");
         RequestQueue queue = Volley.newRequestQueue(this);
-        mAdapter = new AdapterDisplayReview(reviews, getApplicationContext());
+        mAdapter = new AdapterDisplayReview(reviews, getApplicationContext(),jsonToken);
         recyclerView.setAdapter(mAdapter);
         layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -125,12 +121,19 @@ public class DisplayReviewActivity extends AppCompatActivity {
                         }
                     }
 
-                    mAdapter = new AdapterDisplayReview(reviews, getApplicationContext());
+                    mAdapter = new AdapterDisplayReview(reviews, getApplicationContext(),jsonToken);
                     recyclerView.setAdapter(mAdapter);
                     layoutManager = new LinearLayoutManager(getApplicationContext());
                     recyclerView.setLayoutManager(layoutManager);
 
-                }, error -> Log.d("tag", "onErrorResponse: " + error.getMessage()));
+                }, error -> Log.d("tag", "onErrorResponse: " + error.getMessage())) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", "Bearer " + jsonToken);
+                return params;
+            }
+        };
         queue.add(jsonArrayRequest);
     }
 

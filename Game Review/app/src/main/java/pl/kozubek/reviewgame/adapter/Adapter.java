@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,9 +18,9 @@ import com.squareup.picasso.Picasso;
 import java.text.DecimalFormat;
 import java.util.List;
 
-import pl.kozubek.reviewgame.entity.Game;
 import pl.kozubek.reviewgame.R;
 import pl.kozubek.reviewgame.display.DisplayReviewActivity;
+import pl.kozubek.reviewgame.entity.Game;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
@@ -30,11 +29,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     private List<Game> games;
     private Context context;
     private static final DecimalFormat df = new DecimalFormat("0.00");
+    private String jsonToken;
 
-    public Adapter(Context context, List<Game> games) {
+    public Adapter(Context context, List<Game> games,String token) {
         this.context = context;
         this.inflater = LayoutInflater.from(context);
         this.games = games;
+        this.jsonToken = token;
     }
 
     @NonNull
@@ -56,7 +57,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
         viewHolder.itemView.setOnClickListener(view -> {
             Log.d(TAG,"onBindViewHolder: click on" +games.get(i));
-//            Toast.makeText(context, "You clicked " + games.get(i).getId(), Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(context, DisplayReviewActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra("id", games.get(i).getId());
@@ -65,6 +65,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             intent.putExtra("author", games.get(i).getAuthor());
             intent.putExtra("mark", games.get(i).getMark());
             intent.putExtra("description", games.get(i).getDescription());
+            intent.putExtra("jwtToken", jsonToken);
             context.startActivity(intent);
         });
 
@@ -92,4 +93,5 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             gameImage = itemView.findViewById(R.id.gameImage);
         }
     }
+
 }

@@ -1,14 +1,11 @@
 package pl.kozubek.reviewgame.display;
 
 import android.annotation.SuppressLint;
-import android.content.ComponentName;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,38 +17,24 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.navigation.NavigationView;
-import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 import pl.kozubek.reviewgame.R;
 import pl.kozubek.reviewgame.adapter.Adapter;
-import pl.kozubek.reviewgame.adapter.AdapterDisplayReview;
 import pl.kozubek.reviewgame.entity.Game;
-import pl.kozubek.reviewgame.entity.Review;
 import pl.kozubek.reviewgame.functionHelper.SearchGame;
 
 public class DisplayFourBestGames extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -59,6 +42,7 @@ public class DisplayFourBestGames extends AppCompatActivity implements Navigatio
     private static final String TAG = "DisplayFourBestGames";
     private List<Game> games;
     private static final String jsonURL = "http://10.0.2.2:8080/fourBestGames";
+    private static String jsonToken = "";
 
 
     RecyclerView recyclerView;
@@ -73,7 +57,7 @@ public class DisplayFourBestGames extends AppCompatActivity implements Navigatio
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_four_best_games);
-
+        getIncomingIntent();
         Log.d(TAG, "onCreate: started");
 
         recyclerView = findViewById(R.id.gameList);
@@ -97,14 +81,25 @@ public class DisplayFourBestGames extends AppCompatActivity implements Navigatio
         navigationView.setCheckedItem(R.id.four_best_games);
     }
 
+    private void getIncomingIntent() {
+        Log.d(TAG, "getIncomingIntent: checking for incoming intents.");
+        if (getIntent().hasExtra("jwtToken")) {
+            Log.d(TAG, "getIncomingIntent: found intent extras");
+            jsonToken = getIntent().getStringExtra("jwtToken");
+            Log.d(TAG, "getIncomingIntent: token " + jsonToken);
+
+        }
+    }
+
     private void extractGame() {
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
-                Request.Method.GET,
+        JsonArrayRequest getRequest = new JsonArrayRequest(Request.Method.GET,
                 jsonURL,
                 null,
                 response -> {
+                    // response
+                    Log.d("Response", String.valueOf(response));
                     for (int i = 0; i < response.length(); i++) {
                         try {
                             JSONObject gameObject = response.getJSONObject(i);
@@ -115,19 +110,30 @@ public class DisplayFourBestGames extends AppCompatActivity implements Navigatio
                             game.setAuthor(gameObject.getString("author"));
                             game.setDescription(gameObject.getString("description"));
                             game.setMark(gameObject.getDouble("mark"));
-
+                            Log.d(TAG, "exctractGame: Game " + game.toString());
                             games.add(game);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
-                    mAdapter = new Adapter(getApplicationContext(), games);
+                    mAdapter = new Adapter(getApplicationContext(), games, jsonToken);
                     recyclerView.setAdapter(mAdapter);
                     layoutManager = new LinearLayoutManager(getApplicationContext());
                     recyclerView.setLayoutManager(layoutManager);
-
-                }, error -> Log.d("tag", "onErrorResponse: " + error.getMessage()));
-        queue.add(jsonArrayRequest);
+                },
+                error -> {
+                    // TODO Auto-generated method stub
+                    Log.d("ERROR", "error => " + error.toString());
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", "Bearer " + jsonToken);
+                return params;
+            }
+        };
+        queue.add(getRequest);
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -137,17 +143,25 @@ public class DisplayFourBestGames extends AppCompatActivity implements Navigatio
             case R.id.all_games:
                 Intent all_games = new Intent(this, MainActivity.class);
                 all_games.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                all_games.putExtra("jwtToken", jsonToken);
                 startActivity(all_games);
                 break;
             case R.id.four_best_games:
                 Intent four_best_games = new Intent(this, DisplayFourBestGames.class);
                 four_best_games.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                four_best_games.putExtra("jwtToken", jsonToken);
                 startActivity(four_best_games);
                 break;
             case R.id.profile:
                 Intent profile = new Intent(this, DisplayProfile.class);
                 profile.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                profile.putExtra("jwtToken", jsonToken);
                 startActivity(profile);
+                break;
+            case R.id.logout:
+                Intent login = new Intent(this, DisplayLogin.class);
+                login.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(login);
                 break;
         }
 
@@ -169,6 +183,7 @@ public class DisplayFourBestGames extends AppCompatActivity implements Navigatio
         Intent intent = new Intent(this, SearchGame.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("title", textView.getText().toString());
+        intent.putExtra("jwtToken", jsonToken);
         this.startActivity(intent);
     }
 

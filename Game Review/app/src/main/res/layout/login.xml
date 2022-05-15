@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:clipToPadding="false"
+	android:orientation="vertical"
+	android:padding="24dp">
+
+	<RelativeLayout
+		android:id="@+id/android_large_1"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_marginStart="0dp"
+		android:layout_marginTop="0dp">
+
+
+		<EditText
+			android:id="@+id/loginText"
+			android:layout_width="320dp"
+			android:layout_height="54dp"
+			android:layout_marginStart="20dp"
+			android:layout_marginTop="200dp"
+			android:backgroundTint="@color/colorAccentM"
+			android:hint="Login" />
+
+		<EditText
+			android:id="@+id/passwordText"
+			android:layout_width="320dp"
+			android:layout_height="54dp"
+			android:layout_marginStart="20dp"
+			android:layout_marginTop="280dp"
+			android:backgroundTint="@color/colorAccentM"
+			android:hint="Password"
+			android:importantForAutofill="no"
+			android:inputType="textPassword" />
+
+		<TextView
+			android:id="@+id/error"
+			android:layout_width="320dp"
+			android:layout_height="54dp"
+			android:layout_marginStart="20dp"
+			android:layout_marginTop="330dp"
+			android:backgroundTint="@color/colorAccent" />
+
+		<Button
+			android:id="@+id/rectangle_3"
+			android:layout_width="320dp"
+			android:layout_height="50dp"
+			android:layout_marginStart="20dp"
+			android:layout_marginTop="400dp"
+			android:backgroundTint="@color/colorPrimaryM"
+			android:onClick="login"
+			android:text="Login"
+			android:textColor="@color/white"
+			android:textSize="20sp"
+			android:textStyle="bold" />
+
+		<Button
+			android:id="@+id/rectangle_4"
+			android:layout_width="320dp"
+			android:layout_height="50dp"
+			android:layout_marginStart="20dp"
+			android:layout_marginTop="450dp"
+			android:backgroundTint="@color/colorPrimaryM"
+			android:onClick="register"
+			android:text="Register"
+			android:textColor="@color/white"
+			android:textSize="20sp"
+			android:textStyle="bold" />
+
+		<TextView
+			android:id="@+id/welcome"
+			android:layout_width="match_parent"
+			android:layout_height="151dp"
+			android:layout_gravity="center_horizontal|center"
+			android:layout_marginStart="0dp"
+			android:layout_marginTop="0dp"
+			android:gravity="center"
+			android:text="Login"
+			android:textColor="@color/colorPrimaryM"
+			android:textSize="64sp"
+			android:textStyle="bold" />
+
+	</RelativeLayout>
+
+</LinearLayout>

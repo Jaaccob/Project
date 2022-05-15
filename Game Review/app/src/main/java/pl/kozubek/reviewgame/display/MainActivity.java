@@ -7,8 +7,6 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -19,6 +17,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
@@ -30,7 +29,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import pl.kozubek.reviewgame.R;
@@ -38,6 +39,8 @@ import pl.kozubek.reviewgame.adapter.Adapter;
 import pl.kozubek.reviewgame.entity.Game;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    private static final String TAG = "AllGame";
+    private static String jsonToken = "";
 
     RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -54,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.all_game);
+        getIncomingIntent();
 
 
         recyclerView = findViewById(R.id.gameList);
@@ -80,6 +84,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setCheckedItem(R.id.four_best_games);
+    }
+
+    private void getIncomingIntent() {
+        Log.d(TAG, "getIncomingIntent: checking for incoming intents.");
+        if (getIntent().hasExtra("jwtToken")) {
+            Log.d(TAG, "getIncomingIntent: found intent extras");
+            jsonToken = getIntent().getStringExtra("jwtToken");
+            Log.d(TAG, "getIncomingIntent: token " + jsonToken);
+
+        }
     }
 
     @Override
@@ -120,12 +134,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                     .comparingDouble(Game::getMark)
                                     .reversed())
                             .collect(Collectors.toList());
-                    mAdapter = new Adapter(getApplicationContext(), games);
+                    mAdapter = new Adapter(getApplicationContext(), games, jsonToken);
                     recyclerView.setAdapter(mAdapter);
                     layoutManager = new LinearLayoutManager(getApplicationContext());
                     recyclerView.setLayoutManager(layoutManager);
 
-                }, error -> Log.d("tag", "onErrorResponse: " + error.getMessage()));
+                }, error -> Log.d("tag", "onErrorResponse: " + error.getMessage())
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", "Bearer " + jsonToken);
+                return params;
+            }
+        };
+
+
         queue.add(jsonArrayRequest);
     }
 
@@ -148,6 +172,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent profile = new Intent(this, DisplayProfile.class);
                 profile.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(profile);
+                break;
+            case R.id.logout:
+                Intent login = new Intent(this, DisplayLogin.class);
+                login.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(login);
                 break;
         }
 
