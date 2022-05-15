@@ -4,36 +4,30 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.Request;
+import com.android.volley.AuthFailureError;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-import pl.kozubek.reviewgame.adapter.Adapter;
 import pl.kozubek.reviewgame.display.DisplayReviewActivity;
 import pl.kozubek.reviewgame.entity.Game;
 
 public class SearchGame extends AppCompatActivity {
     private static final String TAG = "SearchGame";
+    private static String jsonToken = "";
     private static final String jsonURLTitle = "http://10.0.2.3:8080/singleGameTitle/";
     ProgressDialog dialog;
 
@@ -50,6 +44,7 @@ public class SearchGame extends AppCompatActivity {
         if (getIntent().hasExtra("title")) {
             Log.d(TAG, "getIncomingIntent: found intent extras");
             String title = getIntent().getStringExtra("title");
+            jsonToken = getIntent().getStringExtra("jwtToken");
             Log.d(TAG, "getIncomingIntent: title " + title);
             findGame(title);
         }
@@ -68,7 +63,14 @@ public class SearchGame extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Game not found", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
-        });
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", "Bearer " + jsonToken);
+                return params;
+            }
+        };
         RequestQueue rQueue = Volley.newRequestQueue(SearchGame.this);
         rQueue.add(request);
     }
@@ -93,6 +95,7 @@ public class SearchGame extends AppCompatActivity {
             intent.putExtra("author", game.getAuthor());
             intent.putExtra("mark", game.getMark());
             intent.putExtra("description", game.getDescription());
+            intent.putExtra("jwtToken", jsonToken);
             this.startActivity(intent);
         } catch (JSONException e) {
             e.printStackTrace();

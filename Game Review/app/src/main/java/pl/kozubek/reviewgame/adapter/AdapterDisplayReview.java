@@ -20,15 +20,17 @@ import pl.kozubek.reviewgame.entity.Review;
 public class AdapterDisplayReview extends RecyclerView.Adapter<AdapterDisplayReview.ViewHolder> {
 
     private static final String TAG = "AdapterDisplayReview";
+    private static String jsonToken = "";
     private LayoutInflater inflater;
     private List<Review> review;
     private Context context;
     private static final DecimalFormat df = new DecimalFormat("0");
 
-    public AdapterDisplayReview(List<Review> review, Context context) {
+    public AdapterDisplayReview(List<Review> review, Context context, String token) {
         this.review = review;
         this.inflater = LayoutInflater.from(context);
         this.context = context;
+        this.jsonToken = token;
     }
 
     @NonNull
@@ -43,7 +45,8 @@ public class AdapterDisplayReview extends RecyclerView.Adapter<AdapterDisplayRev
     public void onBindViewHolder(@NonNull AdapterDisplayReview.ViewHolder viewHolder, @SuppressLint("RecyclerView") int i) {
         Log.d(TAG, "onBindViewHolder: set viewHolder");
         viewHolder.reviewNick.setText("Nick: " + review.get(i).getNick());
-        viewHolder.reviewDate.setText("Date: " + review.get(i).getDate().substring(0,review.get(i).getDate().indexOf("T")));
+        viewHolder.reviewDate.setText("Date: " + review.get(i).getDate().substring(0, review.get(i).getDate().indexOf("T")));
+        viewHolder.gameMark.setText("Mark: " + df.format(review.get(i).getReviewMark()) + "/5");
         viewHolder.gameMark.setText("Mark: " + df.format(review.get(i).getReviewMark()) + "/5");
         viewHolder.gameDescription.setText(review.get(i).getReviewDescription());
 
