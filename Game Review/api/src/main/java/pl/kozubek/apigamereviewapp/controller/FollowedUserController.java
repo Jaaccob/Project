@@ -37,7 +37,6 @@ public class FollowedUserController {
 
     @DeleteMapping("/followUserDelete")
     public FollowedUser deleteFollowUser(@RequestBody FollowedUserDto followedUserDto) {
-        System.out.println(followedUserDto.getIdFollowedUser() + " " + followedUserDto.getIdUser());
         return followedUserService.deleteFollowGame(followedUserDto);
     }
 }

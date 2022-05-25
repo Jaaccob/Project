@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
@@ -26,7 +25,7 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,6 +35,7 @@ import java.util.Map;
 import pl.kozubek.reviewgame.R;
 import pl.kozubek.reviewgame.adapter.AdapterDisplayReview;
 import pl.kozubek.reviewgame.entity.Review;
+import pl.kozubek.reviewgame.functionHelper.CustomHurlStack;
 
 public class DisplayReviewActivity extends AppCompatActivity {
     private static final String TAG = "DisplayReviewActivity";
@@ -62,6 +62,7 @@ public class DisplayReviewActivity extends AppCompatActivity {
         reviews = new ArrayList<>();
 
         getIncomingIntent();
+        extractFollowGame();
     }
 
     private void getIncomingIntent() {
@@ -188,6 +189,32 @@ public class DisplayReviewActivity extends AppCompatActivity {
         queue.add(jsonArrayRequest);
     }
 
+    private void extractFollowGame() {
+        Log.d(TAG, "extractFollowGame: connect with api");
+        String jsonURL = "http://10.0.2.2:8080/followedGames/" + idUser + "/" + idGame;
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.GET,
+                jsonURL,
+                response -> {
+                    if (response.length() != 0){
+                        ToggleButton toggleButton = findViewById(R.id.follow_button);
+                        toggleButton.setChecked(true);
+                    }
+                    Log.d(TAG, "extractFollowGame: " + response.length());
+                },
+                error -> Log.d("tag", "onErrorResponse: " + error.getMessage())) {
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", "Bearer " + jsonToken);
+                return params;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
+
     private void addFollowGame(Long idGame, Long idUser) {
         Log.d(TAG, "addFollowGame: add new follow game");
 
@@ -213,12 +240,7 @@ public class DisplayReviewActivity extends AppCompatActivity {
 
                 @Override
                 public byte[] getBody() {
-                    try {
-                        return requestBody.getBytes("utf-8");
-                    } catch (UnsupportedEncodingException uee) {
-                        VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
-                        return null;
-                    }
+                    return requestBody.getBytes(StandardCharsets.UTF_8);
                 }
 
                 @Override
@@ -239,7 +261,8 @@ public class DisplayReviewActivity extends AppCompatActivity {
         Log.d(TAG, "deleteFollowGame: add new follow game");
 
         try {
-            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            CustomHurlStack customHurlStack = new CustomHurlStack();
+            RequestQueue requestQueue = Volley.newRequestQueue(this, customHurlStack);
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("idGame", idGame);
             jsonBody.put("idUser", idUser);
@@ -260,12 +283,7 @@ public class DisplayReviewActivity extends AppCompatActivity {
 
                 @Override
                 public byte[] getBody() {
-                    try {
-                        return requestBody.getBytes("utf-8");
-                    } catch (UnsupportedEncodingException uee) {
-                        VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
-                        return null;
-                    }
+                    return requestBody.getBytes(StandardCharsets.UTF_8);
                 }
 
                 @Override

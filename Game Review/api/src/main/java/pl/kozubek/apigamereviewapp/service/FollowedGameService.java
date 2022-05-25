@@ -1,6 +1,7 @@
 package pl.kozubek.apigamereviewapp.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import pl.kozubek.apigamereviewapp.controller.dto.FollowedGameDto;
 import pl.kozubek.apigamereviewapp.entity.FollowedGame;
 import pl.kozubek.apigamereviewapp.repository.FollowedGameRepository;
@@ -44,5 +45,9 @@ public class FollowedGameService {
         FollowedGame fg = followedGameRepository.findByIdUserAndIdFollowGame(followedGameDto.getIdUser(), followedGameDto.getIdGame());
         followedGameRepository.delete(fg);
         return fg;
+    }
+
+    public FollowedGame getFollowedGames(Long idUser, Long idGame) {
+        return followedGameRepository.findByIdUserAndIdFollowGame(idUser, idGame);
     }
 }
