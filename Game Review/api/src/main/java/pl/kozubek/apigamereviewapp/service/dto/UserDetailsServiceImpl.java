@@ -40,7 +40,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     public Long saveUser(UserDetailsDto userDetailsDto) {
-        validateIfUserExists(userDetailsDto);
+        try {
+            validateIfUserExists(userDetailsDto);
+        }catch (UserAlreadyExistsInDatabaseException e){
+            throw new UserAlreadyExistsInDatabaseException();
+        }
+
         var entity = userMapper.fromDtoToEntity(userDetailsDto);
         var savedEntity = userRepository.save(entity);
         LOGGER.info("User saved = " + savedEntity);

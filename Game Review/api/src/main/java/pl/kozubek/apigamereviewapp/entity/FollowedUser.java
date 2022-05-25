@@ -7,12 +7,16 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.persistence.*;
 
 
-@Embeddable
+@Entity
 @RestController
 @Getter
 @Setter
 @Table(name = "FOLLOWED_USERS")
 public class FollowedUser {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "id_User")
     private Long idUser;

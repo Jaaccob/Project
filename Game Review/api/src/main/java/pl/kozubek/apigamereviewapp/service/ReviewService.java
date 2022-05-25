@@ -2,8 +2,6 @@ package pl.kozubek.apigamereviewapp.service;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
-import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
 import pl.kozubek.apigamereviewapp.entity.Game;
@@ -17,7 +15,6 @@ import pl.kozubek.apigamereviewapp.service.mapper.ReviewDtoMapper;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Data
@@ -61,5 +58,16 @@ public class ReviewService {
             return ReviewDtoMapper.mapReviewToDtoList(game, users, review);
         }
         throw new NotFoundException("Not found");
+    }
+
+    public Review getMark(Long id) {
+        List<Review> reviews = reviewRepository.findAllByIdGame(id);
+        double d = 0;
+        for (Review review : reviews) {
+            d += review.getMark();
+        }
+        d = d/reviews.size();
+        reviews.get(0).setMark(d);
+        return reviews.get(0);
     }
 }

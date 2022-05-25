@@ -20,17 +20,20 @@ import pl.kozubek.reviewgame.entity.Review;
 public class AdapterDisplayReview extends RecyclerView.Adapter<AdapterDisplayReview.ViewHolder> {
 
     private static final String TAG = "AdapterDisplayReview";
+    private Long idUser;
+
     private static String jsonToken = "";
     private LayoutInflater inflater;
     private List<Review> review;
     private Context context;
     private static final DecimalFormat df = new DecimalFormat("0");
 
-    public AdapterDisplayReview(List<Review> review, Context context, String token) {
+    public AdapterDisplayReview(List<Review> review, Context context, String token, Long idUser) {
         this.review = review;
         this.inflater = LayoutInflater.from(context);
         this.context = context;
         this.jsonToken = token;
+        this.idUser = idUser;
     }
 
     @NonNull

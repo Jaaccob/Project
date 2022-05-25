@@ -27,6 +27,7 @@ public class GameWithTypeDTOMapper {
     private static GameWithTypeDTO mapToGameDto(Game game, Type type) {
         return GameWithTypeDTO.builder()
                 .id(game.getId())
+                .imageURL(game.getImageURL())
                 .title(game.getTitle())
                 .description(game.getDescription())
                 .author(game.getAuthor())

@@ -41,6 +41,20 @@
             tools:ignore="DuplicateActivity" />
 
         <activity
+            android:name=".display.DisplayFollowedUsers"
+            android:exported="true"
+            android:label="Activity Title"
+            android:theme="@style/Theme.Shrine.NoActionBar"
+            tools:ignore="DuplicateActivity" />
+
+        <activity
+            android:name=".display.DisplayFollowedGames"
+            android:exported="true"
+            android:label="Activity Title"
+            android:theme="@style/Theme.Shrine.NoActionBar"
+            tools:ignore="DuplicateActivity" />
+
+        <activity
             android:name=".display.DisplayReviewActivity"
             android:exported="true"
             android:label="Activity Title"

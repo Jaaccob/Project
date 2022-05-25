@@ -28,7 +28,7 @@ import pl.kozubek.reviewgame.R;
 public class DisplayRegister extends AppCompatActivity {
     private static final String TAG = "DisplayReviewActivity";
     private static final String jsonURL = "http://10.0.2.2:8080/auth/register";
-    private static final int PASSWORD_LENGTH = 5;
+    private static final int PASSWORD_LENGTH = 6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,24 +36,22 @@ public class DisplayRegister extends AppCompatActivity {
         setContentView(R.layout.register);
     }
 
-    public void checkCorrectPassword(View view){
-        Log.d(TAG,"checkCorrectPassword: checking if the password is correct");
+    public void checkCorrectPassword(View view) {
+        Log.d(TAG, "checkCorrectPassword: checking if the password is correct");
         TextView login = findViewById(R.id.nickTextRegister);
         TextView password = findViewById(R.id.passwordTextRegister);
         TextView confirmPassword = findViewById(R.id.passwordConfirmTextRegister);
 
         String passOne = password.getText().toString();
         String passTwo = confirmPassword.getText().toString();
-        if(!passOne.equals(passTwo)){
+        if (!passOne.equals(passTwo)) {
             TextView error = findViewById(R.id.errorRegister);
             error.setText("Passwords are't the same");
-        }
-        else if (!isValidPassword(passTwo)){
+        } else if (!isValidPassword(passTwo)) {
             TextView error = findViewById(R.id.errorRegister);
-            error.setText("Invalid password, min 6 characters");
-        }
-        else {
-            postJson(login.getText().toString(),password.getText().toString());
+            error.setText("Invalid password, min 6 characters and min 1 special characters");
+        } else {
+            postJson(login.getText().toString(), password.getText().toString());
         }
     }
 
@@ -72,10 +70,13 @@ public class DisplayRegister extends AppCompatActivity {
                         loginToAplication();
                     },
                     error -> {
-                        TextView errorView = findViewById(R.id.error);
-                        if (error.toString().equals("500"))
+                        Log.d(TAG, "eroor: " + error.toString());
+                        TextView errorView = findViewById(R.id.errorRegister);
+                        if (error.networkResponse.statusCode == 500)
                             errorView.setText("Invalid username or passowrd");
-                        else
+                        if (error.networkResponse.statusCode == 403) {
+                            errorView.setText("Username already exist in database");
+                        } else
                             errorView.setText("More problems, check console");
                         Log.e("VOLLEY", error.toString());
                     }) {
@@ -117,33 +118,40 @@ public class DisplayRegister extends AppCompatActivity {
         startActivity(login);
     }
 
-    public static boolean isValidPassword(String password) {
+    private static boolean isValidPassword(String password) {
 
         if (password.length() < PASSWORD_LENGTH) return false;
 
         int charCount = 0;
         int numCount = 0;
+        int specCount = 0;
+        int bigCount = 0;
         for (int i = 0; i < password.length(); i++) {
 
             char ch = password.charAt(i);
-
-            if (isNumeric(ch)) numCount++;
+            if (isBigChar(ch)) bigCount++;
+            else if (isNumeric(ch)) numCount++;
             else if (isLetter(ch)) charCount++;
+            else if (isSpecialChar(ch)) specCount++;
             else return false;
         }
-
-
-        return (charCount >= 2 && numCount >= 2);
+        return (charCount >= 2 && numCount >= 2 && specCount >= 1 && bigCount >= 1);
     }
 
-    public static boolean isLetter(char ch) {
+    private static boolean isLetter(char ch) {
         ch = Character.toUpperCase(ch);
         return (ch >= 'A' && ch <= 'Z');
     }
 
-
-    public static boolean isNumeric(char ch) {
-
+    private static boolean isNumeric(char ch) {
         return (ch >= '0' && ch <= '9');
+    }
+
+    private static boolean isSpecialChar(char ch) {
+        return (ch >= '!' && ch <= '/') || (ch >= ':' && ch <= '@');
+    }
+
+    private static boolean isBigChar(char ch) {
+        return (ch >= 'A' && ch <= 'Z');
     }
 }

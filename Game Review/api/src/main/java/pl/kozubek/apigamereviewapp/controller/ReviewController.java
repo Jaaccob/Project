@@ -42,4 +42,9 @@ public class ReviewController {
     public List<ReviewDto> getSingleGame(@PathVariable String title){
         return reviewService.getSingleGame(title);
     }
+
+    @GetMapping("/mark/{id}")
+    public Review getMark(@PathVariable Long id){
+        return reviewService.getMark(id);
+    }
 }

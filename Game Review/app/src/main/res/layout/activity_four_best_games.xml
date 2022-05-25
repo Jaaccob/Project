@@ -42,8 +42,8 @@
                     android:layout_marginTop="10dp"
                     android:autofillHints=""
                     android:backgroundTint="@color/colorAccentM"
-                    android:hint="Confirm Password"
-                    android:inputType="textPassword" />
+                    android:hint="Search game"
+                    android:inputType="text" />
 
                 <Button
                     android:id="@+id/rectangle_1"

@@ -8,6 +8,7 @@ import lombok.Getter;
 @Builder
 public class GameWithTypeDTO {
     private Long id;
+    private String imageURL;
     private String title;
     private String description;
     private String author;

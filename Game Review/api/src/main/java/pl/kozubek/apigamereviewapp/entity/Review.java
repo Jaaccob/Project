@@ -1,5 +1,6 @@
 package pl.kozubek.apigamereviewapp.entity;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -9,6 +10,7 @@ import java.util.Date;
 
 @Entity
 @RequiredArgsConstructor
+@Data
 @Getter
 @Setter
 @Table(name = "REVIEW")

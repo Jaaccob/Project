@@ -30,49 +30,46 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import pl.kozubek.reviewgame.R;
-import pl.kozubek.reviewgame.adapter.Adapter;
-import pl.kozubek.reviewgame.entity.Game;
+import pl.kozubek.reviewgame.adapter.AdapterDisplayFollowedUsers;
+import pl.kozubek.reviewgame.entity.User;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    private static final String TAG = "AllGame";
-    private static String jsonToken = "";
+public class DisplayFollowedUsers extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    private static final String TAG = "DisplayFollowedUsers";
+    private String jsonToken;
     private static Long id;
 
     RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    private List<Game> games;
-    private static final String jsonGameWithoutTypeUrl = "http://10.0.2.2:8080/gamesWithoutType";
+    private List<User> users;
+    private static final String jsonGameWithTypeUrl = "http://10.0.2.2:8080/followedUsers/";
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate: started");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.all_game);
+        setContentView(R.layout.activity_followed_users);
         getIncomingIntent();
 
-
-        recyclerView = findViewById(R.id.gameList);
+        recyclerView = findViewById(R.id.followUserList);
         recyclerView.setHasFixedSize(true);
 
+        users = new ArrayList<>();
 
-        games = new ArrayList<>();
-        extractGame();
+
         PackageManager pm = getPackageManager();
         pm.setComponentEnabledSetting(new ComponentName(this, MainActivity.class),
                 PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
-
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
@@ -87,16 +84,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setCheckedItem(R.id.four_best_games);
+        extractUser();
         extractUser(id);
     }
 
     private void getIncomingIntent() {
         Log.d(TAG, "getIncomingIntent: checking for incoming intents.");
-        if (getIntent().hasExtra("jwtToken")) {
+        if (getIntent().hasExtra("id")) {
             Log.d(TAG, "getIncomingIntent: found intent extras");
+            id = getIntent().getLongExtra("id", 0);
             jsonToken = getIntent().getStringExtra("jwtToken");
-            Log.d(TAG, "getIncomingIntent: token " + jsonToken);
-            id = getIntent().getLongExtra("id",1);
+            extractUser(id);
         }
     }
 
@@ -108,37 +106,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             super.onBackPressed();
     }
 
-    private void extractGame() {
+    private void extractUser() {
+        Log.d(TAG, "extractUser: extract followed game by " + id);
         RequestQueue queue = Volley.newRequestQueue(this);
 
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
-                jsonGameWithoutTypeUrl,
+                jsonGameWithTypeUrl + id,
                 null,
                 response -> {
+                    Log.d(TAG, "jsonArrayRequest: extract followed game by " + id);
                     for (int i = 0; i < response.length(); i++) {
                         try {
                             JSONObject gameObject = response.getJSONObject(i);
-                            Game game = new Game();
-                            game.setId((long) gameObject.getInt("id"));
-                            game.setImageURL(gameObject.getString("imageURL"));
-                            game.setTitle(gameObject.getString("title"));
-                            game.setAuthor(gameObject.getString("author"));
-                            game.setDescription(gameObject.getString("description"));
-                            game.setMark(gameObject.getDouble("mark"));
-
-                            games.add(game);
+                            Log.d(TAG, "respone: " + gameObject);
+                            User user = new User();
+                            user.setId((long) gameObject.getInt("id"));
+                            user.setImageURL(gameObject.getString("imageURL"));
+                            user.setNick(gameObject.getString("nick"));
+                            user.setEmail(gameObject.getString("email"));
+                            user.setFirstName(gameObject.getString("firstName"));
+                            user.setLastName(gameObject.getString("lastName"));
+                            Log.d(TAG, "extractGame: " + user);
+                            users.add(user);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
-                    games = games.stream()
-                            .sorted(Comparator
-                                    .comparingDouble(Game::getMark)
-                                    .reversed())
-                            .collect(Collectors.toList());
-                    mAdapter = new Adapter(getApplicationContext(), games, jsonToken, id);
+                    mAdapter = new AdapterDisplayFollowedUsers(getApplicationContext(), users, jsonToken, id);
                     recyclerView.setAdapter(mAdapter);
                     layoutManager = new LinearLayoutManager(getApplicationContext());
                     recyclerView.setLayoutManager(layoutManager);
@@ -156,7 +152,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         queue.add(jsonArrayRequest);
     }
-
 
     @SuppressLint("NonConstantResourceId")
     @Override
@@ -216,8 +211,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 null,
                 response -> {
                     // response
-                    Log.d(TAG, String.valueOf(response));
-                    Log.d(TAG, "exctractUser: response " + response);
+                    Log.d(TAG, "extractUser: " + response);
 
                     TextView user = findViewById(R.id.userID);
                     TextView email = findViewById(R.id.userEmail);
@@ -243,6 +237,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         };
         queue.add(getRequest);
     }
-
 
 }

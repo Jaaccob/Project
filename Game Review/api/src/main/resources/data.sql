@@ -242,40 +242,40 @@ INSERT INTO CONNECT_GAME_TYPE(ID_GAME, ID_TYPE)
 VALUES (15, 4);
 
 INSERT INTO USERS(id, first_Name, last_Name, password, nick, email)
-VALUES (1, 'Jakub', 'Kozubek', 'Jaaccob', 'jakoz',
+VALUES (1, 'Jakub', 'Kozubek', '$2a$10$h68AcQfPAN4VVibeet/VDOT/ibHPT.3mS3Qn/M9ni/sNXbEXQdTty', 'jakoz',
         'kozubekjacob@gmail.com');
 INSERT INTO USERS(id, first_Name, last_Name, password, nick, email)
-VALUES (2, 'Wojciech', 'Witos', 'Rats', 'wojwi',
+VALUES (2, 'Wojciech', 'Witos', '$2a$10$thcAEXsBpIXtjyTP.icz/ueEOgkYQmEqyTkb7WaxVieAhJpGdqYke', 'wojwi',
         'wojciechWitos@gmail.com');
 INSERT INTO USERS(id, first_Name, last_Name, password, nick, email)
-VALUES (3, 'Jakub', 'Wasyluk', 'BriX', 'jakwa',
+VALUES (3, 'Jakub', 'Wasyluk', '$2a$10$vAzqom5/TfIWIgtBw8i9teQTYS3iP74mbbzxMQ1cgrthkj/GuuSHK', 'jakwa',
         'BriXb@gmail.com');
 INSERT INTO USERS(id, first_Name, last_Name, password, nick, email)
-VALUES (4, 'Michał', 'Pączek', 'Poncho', 'micpa',
+VALUES (4, 'Michał', 'Pączek', '$2a$10$g18mqRnxptyrXd7Gem2OLOFL28Q2NlHNEQUXTCjM6zdCSUO38mhT6', 'micpa',
         'Ponchix@gmail.com');
 INSERT INTO USERS(id, first_Name, last_Name, password, nick, email)
-VALUES (5, 'Pawel', 'Eskobar', 'Pablos', 'pawes',
+VALUES (5, 'Pawel', 'Eskobar', '$2a$10$PeD/1MPxqHzcCe/np9i3HOeI9.KujdAU6z8e4cLCUYKEmqx3ixaGK', 'pawes',
         'Pablos@gmail.com');
 INSERT INTO USERS(id, first_Name, last_Name, password, nick, email)
-VALUES (6, 'Akashima', 'Kazuto', 'Kirigaya', 'akaka',
+VALUES (6, 'Akashima', 'Kazuto', '$2a$10$S/I1pf12EIL5JEyTCq5uPu.2t7RBkkbVCe0Xpwx5bKz64k6miu4Fy', 'akaka',
         'KazutoKirigaya@gmail.com');
 INSERT INTO USERS(id, first_Name, last_Name, password, nick, email)
-VALUES (7, 'Andżej', 'Wąsaty', 'Wexel', 'andwa',
+VALUES (7, 'Andżej', 'Wąsaty', '$2a$10$FSwzTKJ.cdfj46p02ki0qOGTNUfeOGXagA1zGzVVXGFa1xvSTBct6	', 'andwa',
         'Wąsaty_Wexel@gmail.com');
 INSERT INTO USERS(id, first_Name, last_Name, password, nick, email)
-VALUES (8, 'Dominik', 'Bzik', '4everB', 'dombz',
+VALUES (8, 'Dominik', 'Bzik', '$2a$10$jcUsppBcKFGhxx0qJ/FA0u2GiutGcsx8sUCf0CCNhEmb6EYEqrxOe', 'dombz',
         '4Bzikever@gmail.com');
 INSERT INTO USERS(id, first_Name, last_Name, password, nick, email)
-VALUES (9, 'Kamari', 'Due', 'Murderer', 'kamdu',
+VALUES (9, 'Kamari', 'Due', '$2a$10$68XINjWZRpAEF95pi1sqZ.14JY5CWKnV64fXmnRdalDwL5Hv8YiMe', 'kamdu',
         'Due_To_Murder@gmail.com');
 INSERT INTO USERS(id, first_Name, last_Name, password, nick, email)
-VALUES (10, 'Conqueror', 'WR', 'qwdas3qw', 'xasw',
+VALUES (10, 'Conqueror', 'WR', '$2a$10$z8RoVCUO9c29iqWuJ44LIOoapUw71LFmjBYJpgeKb9gkT5JJKLSl6', 'xasw',
         'Walix15@gmail.com');
 INSERT INTO USERS(id, first_Name, last_Name, password, nick, email)
-VALUES (11, 'Samari', 'Amalejkum', 'qwdasz', 'WOrldDestroyer',
+VALUES (11, 'Samari', 'Amalejkum', '$2a$10$5A.G2Q9W/eBdZIr/s5trCuVHIb76xLu.D9F5DDEBgztGl.Mmr9X5m', 'WOrldDestroyer',
         'Krawczykonus@gmail.com');
 INSERT INTO USERS(id, first_Name, last_Name, password, nick, email)
-VALUES (12, 'Paweł', 'Bisok', 'asdawdas', 'Woxis',
+VALUES (12, 'Paweł', 'Bisok', '$2a$10$ZDZswm1tVHZG5xTTlcOXg.Q8kQi7kdoWYL11I3TXfYhzL//Z39IR2', 'Woxis',
         'PabloEnrico@gmail.com');
 
 INSERT INTO FOLLOWED_GAMES(id_User, followed_Id_Game)

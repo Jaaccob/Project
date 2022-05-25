@@ -1,17 +1,22 @@
 package pl.kozubek.apigamereviewapp.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.persistence.*;
 
-@Embeddable
-@RestController
+@Entity
 @Getter
 @Setter
+@RequiredArgsConstructor
+@AllArgsConstructor
+@Builder
 @Table(name = "FOLLOWED_GAMES")
 public class FollowedGame {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "id_User")
     private Long idUser;

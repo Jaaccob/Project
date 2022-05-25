@@ -29,6 +29,7 @@ import pl.kozubek.reviewgame.R;
 public class DisplayLogin extends AppCompatActivity {
     private static final String TAG = "DisplayLogin";
     private static final String jsonURL = "http://10.0.2.2:8080/auth/token";
+    private String nick;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,12 +60,14 @@ public class DisplayLogin extends AppCompatActivity {
                 .replace("\"", "")
                 .replace("}", "");
         activityFourBestGames.putExtra("jwtToken", token);
+        activityFourBestGames.putExtra("nick", nick);
         startActivity(activityFourBestGames);
     }
 
     private void postJson(String login, String pass) {
         Log.d(TAG, "postJson: send login and password to api");
         String[] token = new String[1];
+        nick = login;
         try {
             RequestQueue requestQueue = Volley.newRequestQueue(this);
             JSONObject jsonBody = new JSONObject();

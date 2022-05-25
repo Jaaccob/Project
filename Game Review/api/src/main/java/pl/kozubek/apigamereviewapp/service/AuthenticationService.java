@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 import pl.kozubek.apigamereviewapp.exception.InvalidNickOrPassword;
+import pl.kozubek.apigamereviewapp.exception.UserAlreadyExistsInDatabaseException;
 import pl.kozubek.apigamereviewapp.service.dto.AuthenticationJwtToken;
 import pl.kozubek.apigamereviewapp.service.dto.UserDetailsDto;
 import pl.kozubek.apigamereviewapp.service.dto.UserDetailsServiceImpl;
