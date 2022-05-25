@@ -36,6 +36,7 @@ import java.util.Map;
 
 import pl.kozubek.reviewgame.R;
 import pl.kozubek.reviewgame.adapter.AdapterDisplayFollowedGames;
+import pl.kozubek.reviewgame.dto.GameDto;
 import pl.kozubek.reviewgame.dto.GameWithTypeArray;
 import pl.kozubek.reviewgame.entity.GameWithType;
 
@@ -48,7 +49,7 @@ public class DisplayFollowedGames extends AppCompatActivity implements Navigatio
     RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    private List<GameWithType> games;
+    private List<GameDto> games;
     private static final String jsonGameWithTypeUrl = "http://10.0.2.2:8080/followedGames/";
 
     DrawerLayout drawerLayout;
@@ -120,20 +121,21 @@ public class DisplayFollowedGames extends AppCompatActivity implements Navigatio
                     for (int i = 0; i < response.length(); i++) {
                         try {
                             JSONObject gameObject = response.getJSONObject(i);
-                            GameWithType game = new GameWithType();
+                            Log.d(TAG, "extractGame: " + gameObject);
+                            GameDto game = new GameDto();
                             game.setId((long) gameObject.getInt("id"));
                             game.setImageURL(gameObject.getString("imageURL"));
                             game.setTitle(gameObject.getString("title"));
                             game.setAuthor(gameObject.getString("author"));
                             game.setDescription(gameObject.getString("description"));
-                            game.setType(gameObject.getString("types"));
+                            Log.d(TAG, "extractGame: " + game);
                             games.add(game);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
-                    List<GameWithTypeArray> array = compactType(games);
-                    mAdapter = new AdapterDisplayFollowedGames(getApplicationContext(), array, jsonToken, id);
+//                    List<GameWithTypeArray> array = compactType(games);
+                    mAdapter = new AdapterDisplayFollowedGames(getApplicationContext(), games, jsonToken, id);
                     recyclerView.setAdapter(mAdapter);
                     layoutManager = new LinearLayoutManager(getApplicationContext());
                     recyclerView.setLayoutManager(layoutManager);

@@ -1,9 +1,9 @@
 package pl.kozubek.apigamereviewapp.service;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 import pl.kozubek.apigamereviewapp.controller.dto.FollowedGameDto;
 import pl.kozubek.apigamereviewapp.entity.FollowedGame;
+import pl.kozubek.apigamereviewapp.entity.Game;
 import pl.kozubek.apigamereviewapp.repository.FollowedGameRepository;
 import pl.kozubek.apigamereviewapp.service.dto.GameWithTypeDTO;
 import pl.kozubek.apigamereviewapp.service.mapper.FollowedGameMapper;
@@ -26,9 +26,9 @@ public class FollowedGameService {
         return followedGameRepository.findByIdUser(id);
     }
 
-    public List<GameWithTypeDTO> getFollowedGames(Long id) {
+    public List<pl.kozubek.apigamereviewapp.service.dto.FollowedGameDto> getFollowedGames(Long id) {
         List<FollowedGame> allFollowedGame = followedGameRepository.findByIdUser(id);
-        List<GameWithTypeDTO> games = gameService.getGameWithType();
+        List<Game> games = gameService.getAllGames();
         return FollowedGameMapper.mapToGameDtos(allFollowedGame, games);
     }
 

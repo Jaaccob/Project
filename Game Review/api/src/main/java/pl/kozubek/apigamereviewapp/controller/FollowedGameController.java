@@ -36,7 +36,7 @@ public class FollowedGameController {
      * @return Zwraca informację na temat gier z ich typami
      */
     @GetMapping("/followedGames/{id}")
-    public List<GameWithTypeDTO> getFollowedGames(@PathVariable Long id) {
+    public List<pl.kozubek.apigamereviewapp.service.dto.FollowedGameDto> getFollowedGames(@PathVariable Long id) {
         return followedGameService.getFollowedGames(id);
     }
 

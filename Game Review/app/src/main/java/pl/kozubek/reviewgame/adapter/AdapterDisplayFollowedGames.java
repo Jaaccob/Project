@@ -19,7 +19,7 @@ import java.util.List;
 
 import pl.kozubek.reviewgame.R;
 import pl.kozubek.reviewgame.display.DisplayReviewActivity;
-import pl.kozubek.reviewgame.dto.GameWithTypeArray;
+import pl.kozubek.reviewgame.dto.GameDto;
 
 public class AdapterDisplayFollowedGames extends RecyclerView.Adapter<AdapterDisplayFollowedGames.ViewHolder> {
 
@@ -27,11 +27,11 @@ public class AdapterDisplayFollowedGames extends RecyclerView.Adapter<AdapterDis
     private Long idUser;
 
     private LayoutInflater inflater;
-    private List<GameWithTypeArray> games;
+    private List<GameDto> games;
     private Context context;
     private String jsonToken;
 
-    public AdapterDisplayFollowedGames(Context context, List<GameWithTypeArray> games, String token, Long idUser) {
+    public AdapterDisplayFollowedGames(Context context, List<GameDto> games, String token, Long idUser) {
         this.context = context;
         this.inflater = LayoutInflater.from(context);
         this.games = games;
@@ -54,7 +54,6 @@ public class AdapterDisplayFollowedGames extends RecyclerView.Adapter<AdapterDis
         viewHolder.gameTitle.setText(games.get(i).getTitle());
         viewHolder.gameAuthor.setText("Author: " + games.get(i).getAuthor());
         viewHolder.gameDescription.setText(games.get(i).getDescription());
-        viewHolder.gameType.setText("Type: " + games.get(i).getType());
         Picasso.get().load(games.get(i).getImageURL()).into(viewHolder.gameImage);
 
         viewHolder.itemView.setOnClickListener(view -> {
