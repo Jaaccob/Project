@@ -45,5 +45,8 @@
     
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="followed_game">Followed Game:</string>
+    <string name="followed_user">Followed User:</string>
+    <string name="user_jaccob">User: Jaccob</string>
 
 </resources>

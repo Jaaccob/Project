@@ -1,18 +1,18 @@
 package pl.kozubek.apigamereviewapp.service.mapper;
 
+import lombok.Data;
 import pl.kozubek.apigamereviewapp.entity.FollowedGame;
 import pl.kozubek.apigamereviewapp.entity.Game;
-import pl.kozubek.apigamereviewapp.entity.Review;
-import pl.kozubek.apigamereviewapp.entity.User;
 import pl.kozubek.apigamereviewapp.service.dto.FollowedGameDto;
-import pl.kozubek.apigamereviewapp.service.dto.GameWithTypeDTO;
-import pl.kozubek.apigamereviewapp.service.dto.ReviewDto;
+import pl.kozubek.apigamereviewapp.service.dto.GameWithoutTypeDTO;
+import pl.kozubek.apigamereviewapp.service.dto.ReviewMarkDto;
 
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
-
+@Data
 public class FollowedGameMapper {
+
+    private static GameWithoutTypMapper gameWithoutTypMapper;
 
     private FollowedGameMapper() {
     }
@@ -33,5 +33,13 @@ public class FollowedGameMapper {
                 .description(game.getDescription())
                 .author(game.getAuthor())
                 .build();
+    }
+
+    public static List<GameWithoutTypeDTO> mapToGameWithotTypeDtos(List<FollowedGame> allFollowedGame, List<Game> games, List<ReviewMarkDto> marks) {
+        List<GameWithoutTypeDTO> gameWithoutTypeDTO = GameWithoutTypMapper.mapToGameDtos(games,marks);
+        return allFollowedGame.stream()
+                .flatMap(followedGame -> gameWithoutTypeDTO.stream()
+                        .filter(game -> followedGame.getIdFollowGame().equals(game.getId())))
+                .toList();
     }
 }

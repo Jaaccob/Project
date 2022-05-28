@@ -7,18 +7,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.squareup.picasso.Picasso;
-
 import java.util.List;
 
 import pl.kozubek.reviewgame.R;
-import pl.kozubek.reviewgame.display.DisplayProfileUser;
+import pl.kozubek.reviewgame.display.DisplayUserProfile;
 import pl.kozubek.reviewgame.entity.User;
 
 public class AdapterDisplayFollowedUsers extends RecyclerView.Adapter<AdapterDisplayFollowedUsers.ViewHolder> {
@@ -52,16 +49,16 @@ public class AdapterDisplayFollowedUsers extends RecyclerView.Adapter<AdapterDis
 
         viewHolder.userNick.setText(users.get(i).getNick());
 //        Picasso.get().load(users.get(i).getImageURL()).into(viewHolder.userImage);
-        Picasso.get().load("https://i.ytimg.com/vi/wcLayGm_pM4/maxresdefault.jpg").into(viewHolder.userImage);
+//        Picasso.get().load("https://i.ytimg.com/vi/wcLayGm_pM4/maxresdefault.jpg").into(viewHolder.userImage);
 
         viewHolder.itemView.setOnClickListener(view -> {
             Log.d(TAG, "onBindViewHolder: click on" + users.get(i));
-            Intent intent = new Intent(context, DisplayProfileUser.class);
+            Intent intent = new Intent(context, DisplayUserProfile.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra("id", users.get(i).getId());
             intent.putExtra("idUser", idUser);
             intent.putExtra("nick", users.get(i).getNick());
-            intent.putExtra("imageURL", "https://i.ytimg.com/vi/wcLayGm_pM4/maxresdefault.jpg");
+//            intent.putExtra("imageURL", "https://i.ytimg.com/vi/wcLayGm_pM4/maxresdefault.jpg");
             intent.putExtra("firstName", users.get(i).getFirstName());
             intent.putExtra("lastName", users.get(i).getLastName());
             intent.putExtra("email", users.get(i).getEmail());
@@ -79,13 +76,13 @@ public class AdapterDisplayFollowedUsers extends RecyclerView.Adapter<AdapterDis
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView userNick;
-        ImageView userImage;
+//        ImageView userImage;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            userImage = itemView.findViewById(R.id.follow_user_image);
+//            userImage = itemView.findViewById(R.id.follow_user_image);
             userNick = itemView.findViewById(R.id.follow_user_nick);
         }
     }

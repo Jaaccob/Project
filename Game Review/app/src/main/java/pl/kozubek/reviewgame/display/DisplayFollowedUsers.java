@@ -224,7 +224,6 @@ public class DisplayFollowedUsers extends AppCompatActivity implements Navigatio
                     }
                 },
                 error -> {
-                    // TODO Auto-generated method stub
                     Log.d("ERROR", "error => " + error.toString());
                 }
         ) {

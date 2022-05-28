@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.kozubek.apigamereviewapp.controller.dto.FollowedGameDto;
 import pl.kozubek.apigamereviewapp.entity.FollowedGame;
 import pl.kozubek.apigamereviewapp.service.FollowedGameService;
-import pl.kozubek.apigamereviewapp.service.dto.GameWithTypeDTO;
+import pl.kozubek.apigamereviewapp.service.dto.GameWithoutTypeDTO;
 
 import java.util.List;
 
@@ -38,6 +38,11 @@ public class FollowedGameController {
     @GetMapping("/followedGames/{id}")
     public List<pl.kozubek.apigamereviewapp.service.dto.FollowedGameDto> getFollowedGames(@PathVariable Long id) {
         return followedGameService.getFollowedGames(id);
+    }
+
+    @GetMapping("/folllowGamesWithoutType/{id}")
+    public List<GameWithoutTypeDTO> getFollowedGamesWithoutType(@PathVariable Long id){
+        return followedGameService.getFollowedGamesWithoutType(id);
     }
 
     @GetMapping("/followedGames/{idUser}/{idGame}")
