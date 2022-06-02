@@ -28,7 +28,7 @@ import pl.kozubek.reviewgame.entity.Game;
 public class SearchGame extends AppCompatActivity {
     private static final String TAG = "SearchGame";
     private static String jsonToken = "";
-    private static final String jsonURLTitle = "http://10.0.2.3:8080/singleGameTitle/";
+    private static final String jsonURLTitle = "https://reviewgameapp.herokuapp.com/singleGameTitle/";
     ProgressDialog dialog;
 
 

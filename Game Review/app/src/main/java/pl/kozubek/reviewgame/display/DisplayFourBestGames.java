@@ -42,7 +42,7 @@ public class DisplayFourBestGames extends AppCompatActivity implements Navigatio
 
     private static final String TAG = "DisplayFourBestGames";
     private List<Game> games;
-    private static final String jsonURL = "http://10.0.2.2:8080/fourBestGames";
+    private static final String jsonURL = "https://reviewgameapp.herokuapp.com/fourBestGames";
     private static String jsonToken = "";
     private static String nick;
     private static Long id;
@@ -142,7 +142,7 @@ public class DisplayFourBestGames extends AppCompatActivity implements Navigatio
 
     private void extractUser(String nick) {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String json = "http://10.0.2.2:8080/user/findNick/" + nick;
+        String json = "https://reviewgameapp.herokuapp.com/user/findNick/" + nick;
         JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET,
                 json,
                 null,

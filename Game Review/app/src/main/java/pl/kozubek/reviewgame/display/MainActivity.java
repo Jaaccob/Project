@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<Game> games;
-    private static final String jsonGameWithoutTypeUrl = "http://10.0.2.2:8080/gamesWithoutType";
+    private static final String jsonGameWithoutTypeUrl = "https://reviewgameapp.herokuapp.com/gamesWithoutType";
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
@@ -210,7 +210,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void extractUser(Long id) {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String json = "http://10.0.2.2:8080/user/" + id;
+        String json = "https://reviewgameapp.herokuapp.com/user/" + id;
         JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET,
                 json,
                 null,

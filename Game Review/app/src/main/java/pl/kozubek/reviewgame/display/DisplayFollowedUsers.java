@@ -48,7 +48,7 @@ public class DisplayFollowedUsers extends AppCompatActivity implements Navigatio
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<User> users;
-    private static final String jsonGameWithTypeUrl = "http://10.0.2.2:8080/followedUsers/";
+    private static final String jsonGameWithTypeUrl = "https://reviewgameapp.herokuapp.com/followedUsers/";
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
@@ -205,7 +205,7 @@ public class DisplayFollowedUsers extends AppCompatActivity implements Navigatio
 
     private void extractUser(Long id) {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String json = "http://10.0.2.2:8080/user/" + id;
+        String json = "https://reviewgameapp.herokuapp.com/user/" + id;
         JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET,
                 json,
                 null,

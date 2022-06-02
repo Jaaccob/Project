@@ -92,7 +92,7 @@ public class DisplayUserProfile extends AppCompatActivity {
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
-                "http://10.0.2.2:8080/followedUsers/" + idUser,
+                "https://reviewgameapp.herokuapp.com/followedUsers/" + idUser,
                 null,
                 response -> {
                     for (int i = 0; i < response.length(); i++) {
@@ -140,7 +140,7 @@ public class DisplayUserProfile extends AppCompatActivity {
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
-                "http://10.0.2.2:8080/folllowGamesWithoutType/" + idUser,
+                "https://reviewgameapp.herokuapp.com/folllowGamesWithoutType/" + idUser,
                 null,
                 response -> {
                     for (int i = 0; i < response.length(); i++) {
@@ -188,7 +188,7 @@ public class DisplayUserProfile extends AppCompatActivity {
             final String requestBody = jsonBody.toString();
 
             StringRequest stringRequest = new StringRequest(Request.Method.PUT,
-                    "http://10.0.2.2:8080/followUserAdd",
+                    "https://reviewgameapp.herokuapp.com/followUserAdd",
                     response -> {
                         Log.i(TAG, "stringRequest: " + response);
                     },
@@ -231,7 +231,7 @@ public class DisplayUserProfile extends AppCompatActivity {
             final String requestBody = jsonBody.toString();
 
             StringRequest stringRequest = new StringRequest(Request.Method.DELETE,
-                    "http://10.0.2.2:8080/followUserDelete",
+                    "https://reviewgameapp.herokuapp.com/followUserDelete",
                     response -> {
                         Log.i(TAG, "stringRequest: " + response);
                     },

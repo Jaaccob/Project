@@ -38,7 +38,7 @@ import pl.kozubek.reviewgame.R;
 public class DisplayProfile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = "DisplayProfile";
-    private static final String jsonURLUser = "http://10.0.2.2:8080/user/";
+    private static final String jsonURLUser = "https://reviewgameapp.herokuapp.com/user/";
     private static String jsonToken = "";
     private static Long id;
 
@@ -185,7 +185,7 @@ public class DisplayProfile extends AppCompatActivity implements NavigationView.
 
     private void extractUser(Long id) {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String json = "http://10.0.2.2:8080/user/" + id;
+        String json = "https://reviewgameapp.herokuapp.com/user/" + id;
         JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET,
                 json,
                 null,

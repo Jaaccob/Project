@@ -46,7 +46,7 @@ public class DisplayReviewActivity extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<Review> reviews;
-    private static final String jsonGameWithoutTypeUrl = "http://10.0.2.2:8080/reviews/";
+    private static final String jsonGameWithoutTypeUrl = "https://reviewgameapp.herokuapp.com/reviews/";
     private static final DecimalFormat df = new DecimalFormat("0.00");
 
     @Override
@@ -113,7 +113,7 @@ public class DisplayReviewActivity extends AppCompatActivity {
     private void extractMark(Long id) {
         Log.d(TAG, "extract: connect with api");
         RequestQueue queue = Volley.newRequestQueue(this);
-        String json = "http://10.0.2.2:8080/mark/" + id;
+        String json = "https://reviewgameapp.herokuapp.com/mark/" + id;
         JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET,
                 json,
                 null,
@@ -191,7 +191,7 @@ public class DisplayReviewActivity extends AppCompatActivity {
 
     private void extractFollowGame() {
         Log.d(TAG, "extractFollowGame: connect with api");
-        String jsonURL = "http://10.0.2.2:8080/followedGames/" + idUser + "/" + idGame;
+        String jsonURL = "https://reviewgameapp.herokuapp.com/followedGames/" + idUser + "/" + idGame;
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(
                 Request.Method.GET,
@@ -226,7 +226,7 @@ public class DisplayReviewActivity extends AppCompatActivity {
             final String requestBody = jsonBody.toString();
 
             StringRequest stringRequest = new StringRequest(Request.Method.PUT,
-                    "http://10.0.2.2:8080/followGameAdd",
+                    "https://reviewgameapp.herokuapp.com/followGameAdd",
                     response -> {
                         Log.i(TAG, "stringRequest: " + response);
                     },
@@ -269,7 +269,7 @@ public class DisplayReviewActivity extends AppCompatActivity {
             final String requestBody = jsonBody.toString();
 
             StringRequest stringRequest = new StringRequest(Request.Method.DELETE,
-                    "http://10.0.2.2:8080/followGameDelete",
+                    "https://reviewgameapp.herokuapp.com/followGameDelete",
                     response -> {
                         Log.i(TAG, "stringRequest: " + response);
                     },
