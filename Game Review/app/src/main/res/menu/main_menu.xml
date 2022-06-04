@@ -11,10 +11,6 @@
             android:icon="@drawable/allgame"
             android:title="All games" />
         <item
-            android:id="@+id/statystic"
-            android:icon="@drawable/statistics"
-            android:title="Statystic" />
-        <item
             android:id="@+id/followed_user"
             android:icon="@drawable/followuser"
             android:title="Follow users" />
@@ -22,10 +18,6 @@
             android:id="@+id/follow_game"
             android:icon="@drawable/followgame"
             android:title="Follow Games" />
-        <item
-            android:id="@+id/option"
-            android:icon="@drawable/settings"
-            android:title="Options" />
 
     </group>
 
@@ -33,10 +25,6 @@
         <item android:title="Profile">
 
             <menu>
-                <item
-                    android:id="@+id/login"
-                    android:icon="@drawable/login"
-                    android:title="Login" />
 
                 <item
                     android:id="@+id/profile"

@@ -49,6 +49,7 @@ public class DisplayFollowedUsers extends AppCompatActivity implements Navigatio
     private RecyclerView.LayoutManager layoutManager;
     private List<User> users;
     private static final String jsonGameWithTypeUrl = "https://reviewgameapp.herokuapp.com/followedUsers/";
+//    private static final String jsonGameWithTypeUrl = "http://10.0.2.2:8080/followedUsers/";
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;

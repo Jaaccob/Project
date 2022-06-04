@@ -48,6 +48,13 @@
             tools:ignore="DuplicateActivity" />
 
         <activity
+            android:name=".display.DisplayAddComment"
+            android:exported="true"
+            android:label="Activity Title"
+            android:theme="@style/Theme.Shrine.NoActionBar"
+            tools:ignore="DuplicateActivity" />
+
+        <activity
             android:name=".display.DisplayUserProfile"
             android:exported="true"
             android:label="Activity Title"

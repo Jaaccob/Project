@@ -67,6 +67,7 @@ public class DisplayUserProfile extends AppCompatActivity {
 
         extractUser(id);
         extractGames(id);
+        extractFollowUser();
     }
 
     @SuppressLint("SetTextI18n")
@@ -93,6 +94,7 @@ public class DisplayUserProfile extends AppCompatActivity {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
                 "https://reviewgameapp.herokuapp.com/followedUsers/" + idUser,
+//                "http://10.0.2.2:8080/followedUsers/" + idUser,
                 null,
                 response -> {
                     for (int i = 0; i < response.length(); i++) {
@@ -141,6 +143,7 @@ public class DisplayUserProfile extends AppCompatActivity {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
                 "https://reviewgameapp.herokuapp.com/folllowGamesWithoutType/" + idUser,
+//                "http://10.0.2.2:8080/folllowGamesWithoutType/"+idUser,
                 null,
                 response -> {
                     for (int i = 0; i < response.length(); i++) {
@@ -177,18 +180,19 @@ public class DisplayUserProfile extends AppCompatActivity {
         requestQueue.add(jsonArrayRequest);
     }
 
-    private void addFollowGame(Long idGame, Long idUser) {
+    private void addFollowUser(Long idFollowedUser) {
         Log.d(TAG, "addFollowGame: add new follow game");
 
         try {
             RequestQueue requestQueue = Volley.newRequestQueue(this);
             JSONObject jsonBody = new JSONObject();
-            jsonBody.put("idGame", idGame);
-            jsonBody.put("idUser", idUser);
+            jsonBody.put("idUser", id);
+            jsonBody.put("idFollowedUser", idFollowedUser);
             final String requestBody = jsonBody.toString();
 
             StringRequest stringRequest = new StringRequest(Request.Method.PUT,
                     "https://reviewgameapp.herokuapp.com/followUserAdd",
+//                    "http://10.0.2.2:8080/followUserAdd",
                     response -> {
                         Log.i(TAG, "stringRequest: " + response);
                     },
@@ -219,19 +223,20 @@ public class DisplayUserProfile extends AppCompatActivity {
         }
     }
 
-    private void deleteFollowGame(Long idGame, Long idUser) {
+    private void deleteFollowUser(Long idFollowedUser) {
         Log.d(TAG, "deleteFollowGame: add new follow game");
 
         try {
             CustomHurlStack customHurlStack = new CustomHurlStack();
             RequestQueue requestQueue = Volley.newRequestQueue(this, customHurlStack);
             JSONObject jsonBody = new JSONObject();
-            jsonBody.put("idGame", idGame);
-            jsonBody.put("idUser", idUser);
+            jsonBody.put("idUser", id);
+            jsonBody.put("idFollowedUser", idFollowedUser);
             final String requestBody = jsonBody.toString();
 
             StringRequest stringRequest = new StringRequest(Request.Method.DELETE,
                     "https://reviewgameapp.herokuapp.com/followUserDelete",
+//                    "http://10.0.2.2:8080/followUserDelete",
                     response -> {
                         Log.i(TAG, "stringRequest: " + response);
                     },
@@ -261,6 +266,33 @@ public class DisplayUserProfile extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+    private void extractFollowUser() {
+        Log.d(TAG, "extractFollowGame: connect with api");
+        String jsonURL = "https://reviewgameapp.herokuapp.com/followedUsers/" + id + "/" + idUser;
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.GET,
+                jsonURL,
+                response -> {
+                    if (response.length() != 0) {
+                        ToggleButton toggleButton = findViewById(R.id.follow_button);
+                        toggleButton.setChecked(true);
+                    }
+                    Log.d(TAG, "extractFollowGame: " + response.length());
+                },
+                error -> Log.d("tag", "onErrorResponse: " + error.getMessage())) {
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", "Bearer " + jsonToken);
+                return params;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
+
 
     public void onClickCustomToggleClick(View view) {
         Toast.makeText(this, "Do you like it?", Toast.LENGTH_LONG).show();
@@ -268,11 +300,11 @@ public class DisplayUserProfile extends AppCompatActivity {
 
         Log.d(TAG, "onClickCustomToggleClick " + toggleButton.isChecked());
 
-//        if (toggleButton.isChecked()) {
-//            addFollowGame(idGame, idUser);
-//        } else {
-//            deleteFollowGame(idGame, idUser);
-//        }
+        if (toggleButton.isChecked()) {
+            addFollowUser(idUser);
+        } else {
+            deleteFollowUser(idUser);
+        }
     }
 
 }

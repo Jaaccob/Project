@@ -47,9 +47,8 @@ public class AdapterDisplayFollowedUsers extends RecyclerView.Adapter<AdapterDis
     @Override
     public void onBindViewHolder(@NonNull AdapterDisplayFollowedUsers.ViewHolder viewHolder, @SuppressLint("RecyclerView") int i) {
 
-        viewHolder.userNick.setText(users.get(i).getNick());
-//        Picasso.get().load(users.get(i).getImageURL()).into(viewHolder.userImage);
-//        Picasso.get().load("https://i.ytimg.com/vi/wcLayGm_pM4/maxresdefault.jpg").into(viewHolder.userImage);
+        viewHolder.userNick.setText("Nick: " + users.get(i).getNick());
+        viewHolder.userEmail.setText("Email: " + users.get(i).getEmail());
 
         viewHolder.itemView.setOnClickListener(view -> {
             Log.d(TAG, "onBindViewHolder: click on" + users.get(i));
@@ -58,7 +57,6 @@ public class AdapterDisplayFollowedUsers extends RecyclerView.Adapter<AdapterDis
             intent.putExtra("id", users.get(i).getId());
             intent.putExtra("idUser", idUser);
             intent.putExtra("nick", users.get(i).getNick());
-//            intent.putExtra("imageURL", "https://i.ytimg.com/vi/wcLayGm_pM4/maxresdefault.jpg");
             intent.putExtra("firstName", users.get(i).getFirstName());
             intent.putExtra("lastName", users.get(i).getLastName());
             intent.putExtra("email", users.get(i).getEmail());
@@ -76,14 +74,14 @@ public class AdapterDisplayFollowedUsers extends RecyclerView.Adapter<AdapterDis
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView userNick;
-//        ImageView userImage;
+        TextView userEmail;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-//            userImage = itemView.findViewById(R.id.follow_user_image);
             userNick = itemView.findViewById(R.id.follow_user_nick);
+            userEmail = itemView.findViewById(R.id.follow_user_email);
         }
     }
 }

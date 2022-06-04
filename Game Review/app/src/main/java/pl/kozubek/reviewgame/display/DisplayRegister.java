@@ -28,6 +28,7 @@ import pl.kozubek.reviewgame.R;
 public class DisplayRegister extends AppCompatActivity {
     private static final String TAG = "DisplayReviewActivity";
     private static final String jsonURL = "https://reviewgameapp.herokuapp.com/auth/register";
+//    private static final String jsonURL = "http://10.0.2.2:8080/auth/register";
     private static final int PASSWORD_LENGTH = 6;
 
     @Override

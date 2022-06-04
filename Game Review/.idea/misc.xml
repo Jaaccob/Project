@@ -6,10 +6,12 @@
         <entry key="app/src/main/res/drawable-anydpi/followgame.xml" value="0.1655" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1325" />
         <entry key="app/src/main/res/drawable/allgame.xml" value="0.2635" />
+        <entry key="app/src/main/res/drawable/edittext_shadow.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.207" />
         <entry key="app/src/main/res/drawable/ic_baseline_favorite_border_24.xml" value="0.1945" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1325" />
         <entry key="app/src/main/res/drawable/toogle_selector.xml" value="0.1935" />
+        <entry key="app/src/main/res/layout/activity_add_review.xml" value="0.23958333333333334" />
         <entry key="app/src/main/res/layout/activity_followed_games.xml" value="0.26640625" />
         <entry key="app/src/main/res/layout/activity_followed_users.xml" value="0.2671875" />
         <entry key="app/src/main/res/layout/activity_four_best_games.xml" value="0.33" />

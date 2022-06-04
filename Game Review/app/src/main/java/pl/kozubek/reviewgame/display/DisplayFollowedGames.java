@@ -37,8 +37,6 @@ import java.util.Map;
 import pl.kozubek.reviewgame.R;
 import pl.kozubek.reviewgame.adapter.AdapterDisplayFollowedGames;
 import pl.kozubek.reviewgame.dto.GameDto;
-import pl.kozubek.reviewgame.dto.GameWithTypeArray;
-import pl.kozubek.reviewgame.entity.GameWithType;
 
 public class DisplayFollowedGames extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -51,6 +49,7 @@ public class DisplayFollowedGames extends AppCompatActivity implements Navigatio
     private RecyclerView.LayoutManager layoutManager;
     private List<GameDto> games;
     private static final String jsonGameWithTypeUrl = "https://reviewgameapp.herokuapp.com/followedGames/";
+//    private static final String jsonGameWithTypeUrl = "http://10.0.2.2:8080/followedGames/";
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
@@ -134,7 +133,6 @@ public class DisplayFollowedGames extends AppCompatActivity implements Navigatio
                             e.printStackTrace();
                         }
                     }
-//                    List<GameWithTypeArray> array = compactType(games);
                     mAdapter = new AdapterDisplayFollowedGames(getApplicationContext(), games, jsonToken, id);
                     recyclerView.setAdapter(mAdapter);
                     layoutManager = new LinearLayoutManager(getApplicationContext());
@@ -153,30 +151,6 @@ public class DisplayFollowedGames extends AppCompatActivity implements Navigatio
 
         queue.add(jsonArrayRequest);
     }
-
-    private List<GameWithTypeArray> compactType(List<GameWithType> games) {
-        List<GameWithTypeArray> gameWithType = new ArrayList<>();
-        List<String> strings = new ArrayList<>();
-        strings.add(games.get(0).getType());
-        gameWithType.add(new GameWithTypeArray(games.get(0).getId(), games.get(0).getImageURL(),
-                games.get(0).getTitle(), games.get(0).getDescription(), games.get(0).getAuthor(),
-                strings));
-        for (GameWithType game : games) {
-            for (GameWithTypeArray g : gameWithType) {
-                if (g.getId().equals(game.getId())) {
-                    if (!g.getType().contains(game.getType()))
-                        g.setType(game.getType());
-                } else {
-                    List<String> array = new ArrayList<>();
-                    array.add(game.getType());
-                    gameWithType.add(new GameWithTypeArray(game.getId(), game.getImageURL(), game.getTitle(), game.getDescription(), game.getAuthor(), array));
-                }
-            }
-        }
-        Log.d(TAG, "compactType: " + gameWithType);
-        return gameWithType;
-    }
-
 
     @SuppressLint("NonConstantResourceId")
     @Override

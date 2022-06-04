@@ -39,6 +39,7 @@ public class DisplayProfile extends AppCompatActivity implements NavigationView.
 
     private static final String TAG = "DisplayProfile";
     private static final String jsonURLUser = "https://reviewgameapp.herokuapp.com/user/";
+//    private static final String jsonURLUser = "http://10.0.2.2:8080/user/";
     private static String jsonToken = "";
     private static Long id;
 
@@ -220,7 +221,8 @@ public class DisplayProfile extends AppCompatActivity implements NavigationView.
 
     public void changeUser(View view) {
         Log.d(TAG, "postJson: send login and password to api");
-        String jsonURL = "http://10.0.2.2:8080//change/user";
+//        String jsonURL = "http://10.0.2.2:8080/change/user";
+        String jsonURL = "https://reviewgameapp.herokuapp.com/change/user";
         EditText nick = findViewById(R.id.nickTextProfile);
         EditText email = findViewById(R.id.emailTextProfile);
         EditText firstName = findViewById(R.id.firstNameTextProfile);

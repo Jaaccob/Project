@@ -1,6 +1,7 @@
 package pl.kozubek.reviewgame.display;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -42,11 +43,15 @@ public class DisplayReviewActivity extends AppCompatActivity {
     private String jsonToken;
     private Long idGame;
     private Long idUser;
+    private String imageURL;
+    private String title;
+
     RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<Review> reviews;
-    private static final String jsonGameWithoutTypeUrl = "https://reviewgameapp.herokuapp.com/reviews/";
+        private static final String jsonGameWithoutTypeUrl = "https://reviewgameapp.herokuapp.com/reviews/";
+//    private static final String jsonGameWithoutTypeUrl = "http://10.0.2.2:8080/reviews/";
     private static final DecimalFormat df = new DecimalFormat("0.00");
 
     @Override
@@ -78,8 +83,8 @@ public class DisplayReviewActivity extends AppCompatActivity {
             Long id = getIntent().getLongExtra("id", 0);
             idGame = id;
             idUser = getIntent().getLongExtra("idUser", 1);
-            String title = getIntent().getStringExtra("title");
-            String imageURL = getIntent().getStringExtra("imageURL");
+            title = getIntent().getStringExtra("title");
+            imageURL = getIntent().getStringExtra("imageURL");
             String author = getIntent().getStringExtra("author");
             String description = getIntent().getStringExtra("description");
             jsonToken = getIntent().getStringExtra("jwtToken");
@@ -197,7 +202,7 @@ public class DisplayReviewActivity extends AppCompatActivity {
                 Request.Method.GET,
                 jsonURL,
                 response -> {
-                    if (response.length() != 0){
+                    if (response.length() != 0) {
                         ToggleButton toggleButton = findViewById(R.id.follow_button);
                         toggleButton.setChecked(true);
                     }
@@ -311,6 +316,16 @@ public class DisplayReviewActivity extends AppCompatActivity {
         } else {
             deleteFollowGame(idGame, idUser);
         }
+    }
+
+    public void createComment(View view) {
+        Intent comment = new Intent(this, DisplayAddComment.class);
+        comment.putExtra("idUser", idUser);
+        comment.putExtra("idGame", idGame);
+        comment.putExtra("jsonToken", jsonToken);
+        comment.putExtra("image", imageURL);
+        comment.putExtra("title", title);
+        startActivity(comment);
     }
 
 }

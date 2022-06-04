@@ -29,6 +29,7 @@ import pl.kozubek.reviewgame.R;
 public class DisplayLogin extends AppCompatActivity {
     private static final String TAG = "DisplayLogin";
     private static final String jsonURL = "https://reviewgameapp.herokuapp.com/auth/token";
+//    private static final String jsonURL = "http://10.0.2.2:8080/auth/token";
     private String nick;
 
     @Override
